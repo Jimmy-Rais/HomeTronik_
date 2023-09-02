@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,7 @@ class MyApp2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage2(),
+      home: signin(),
     );
   }
 }
@@ -61,25 +62,108 @@ class _MyHomePage2State extends State<MyHomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('LED Control'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'LED Status: $currentStatus',
-              style: TextStyle(fontSize: 20),
+      backgroundColor: Colors.black,
+      /*appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Center(
+          child: Text(
+            'HomeTronik',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: ,
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _toggleLEDStatus,
-              child: Text('Toggle LED'),
-            ),
-          ],
+          ),
         ),
-      ),
+      ),*/
+      body: Stack(children: <Widget>[
+        Positioned(
+          bottom: 100,
+          left: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'LED Status: $currentStatus',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _toggleLEDStatus,
+                child: Text('Toggle LED'),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+            top: 50,
+            right: 20,
+            child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.menu_outlined,
+                  size: 55,
+                  color: const Color.fromARGB(183, 255, 255, 255),
+                ))),
+        Positioned(
+          top: 50,
+          left: 20,
+          child: Column(
+            children: [
+              Container(
+                height: 75,
+                width: 75,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  //borderRadius: BorderRadius.only(topLeft: Radius.circular(0)),
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: CircleAvatar(
+                    child: ClipOval(
+                  child: SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('images/jim.JPG'),
+                        /* Back(
+                                        fit: BoxFit.cover,
+                                      image: AssetImage('images/Jim.JPG'),
+                                      ),
+                                    ),*/
+                      )),
+                )),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+            left: 23,
+            top: 127,
+            child: Column(
+              children: [
+                Text(
+                  "Hi Jimmy!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            )),
+        Positioned(
+            left: 35,
+            top: 148,
+            child: Column(children: [
+              Text(
+                "Welcome to HomeTronik!",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                ),
+              ),
+            ])),
+      ]),
     );
   }
 }
