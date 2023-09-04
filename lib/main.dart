@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'signin.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +63,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[300],
       /*appBar: AppBar(
         backgroundColor: Colors.black,
         title: Center(
@@ -163,6 +164,49 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 ),
               ),
             ])),
+        Positioned(
+            top: 175,
+            left: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Container(
+                    color: Color.fromARGB(160, 25, 83, 102),
+                    height: 60,
+                    width: 60,
+                  ),
+                  SizedBox(width: 30),
+                  Container(
+                    color: Color.fromARGB(160, 25, 83, 102),
+                    height: 60,
+                    width: 60,
+                  ),
+                  SizedBox(width: 30),
+                  Container(
+                    color: Color.fromARGB(160, 25, 83, 102),
+                    height: 60,
+                    width: 60,
+                  ),
+                  SizedBox(width: 30),
+                  Neumorphic(
+                    style: NeumorphicStyle(
+                        shape: NeumorphicShape.concave,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(12)),
+                        depth: 8,
+                        lightSource: LightSource.topLeft,
+                        color: Colors.grey // Background color
+                        ),
+                    child: Container(
+                      color: Color.fromARGB(160, 25, 83, 102),
+                      height: 60,
+                      width: 60,
+                    ),
+                  ),
+                ],
+              ),
+            ))
       ]),
     );
   }
