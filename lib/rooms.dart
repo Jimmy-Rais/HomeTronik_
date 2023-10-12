@@ -16,11 +16,96 @@ class _roomsState extends State<rooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[300],
+      backgroundColor: Colors.black, //Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
-            bottom: 30,
-            left: 10,
+          top: 50,
+          // left: 10,
+          child: Container(
+            child: Column(
+              children: [
+                /* Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                    left: 210,
+                  ),
+                  child: Icon(
+                    Icons.video_camera_back,
+                    color: Colors.red,
+                  ),
+                ),*/
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                    left: 250,
+                  ),
+                  child: Text(
+                    "Live",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            height: 400,
+            width: 410,
+            /*decoration: BoxDecoration(
+                          color: Color.fromRGBO(1, 16, 26, 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white,
+                              // Color of the shadow
+                              spreadRadius: 2, // Spread radius of the shadow
+                              blurRadius: 5, // Blur radius of the shadow
+                              offset: Offset(-2,
+                                  -2), // Offset of the shadow (horizontal, vertical)
+                            ),
+                          ]),*/
+            decoration: BoxDecoration(
+
+                //borderRadius: BorderRadius.circular(30),
+                color: const Color.fromARGB(255, 0, 0, 0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                ),
+                image: DecorationImage(
+                  image: AssetImage("images/living.jpg"),
+                  fit: BoxFit.cover,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueGrey.shade700,
+                    // Color of the shadow
+                    spreadRadius: 1, // Spread radius of the shadow
+                    blurRadius: 10, // Blur radius of the shadow
+                    offset: Offset(
+                        3, 3), // Offset of the shadow (horizontal, vertical)
+                  ),
+                  BoxShadow(
+                    color: Colors.blueGrey.shade200,
+                    // Color of the shadow
+                    spreadRadius: 1, // Spread radius of the shadow
+                    blurRadius: 10, // Blur radius of the shadow
+                    offset: Offset(
+                        -4, -4), // Offset of the shadow (horizontal, vertical)
+                  ),
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.blueGrey.shade200,
+                      Colors.blueGrey.shade400,
+                    ])),
+          ),
+        ),
+        Positioned(
+            bottom: 70,
+            left: 30,
             child: Column(
               children: [
                 Row(
@@ -197,7 +282,7 @@ class _roomsState extends State<rooms> {
                               top: 22,
                             ),
                             child: Text(
-                              "Cameras",
+                              "Sockets",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -220,8 +305,6 @@ class _roomsState extends State<rooms> {
                             ),
                           ]),*/
                       decoration: BoxDecoration(
-
-                          //borderRadius: BorderRadius.circular(30),
                           color: Colors.blueGrey[300],
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
@@ -267,17 +350,16 @@ class _roomsState extends State<rooms> {
                               child: IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    Icons.lock_rounded,
+                                    Icons.window_outlined,
                                     size: 45,
-                                    color:
-                                        const Color.fromARGB(255, 235, 49, 36),
+                                    color: Colors.white,
                                   ))),
                           Padding(
                             padding: EdgeInsets.only(
                               top: 24,
                             ),
                             child: Text(
-                              "Home Security",
+                              "Shutter",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -339,7 +421,7 @@ class _roomsState extends State<rooms> {
                 ),
               ],
             )),
-        Positioned(
+        /*  Positioned(
             bottom: 290,
             left: 25,
             child: Text(
@@ -360,7 +442,7 @@ class _roomsState extends State<rooms> {
                 size: 30,
                 color: Colors.white,
               )),
-        ),
+        ),*/
       ]), /*Stack(
         children: <Widget>[
           Container(
