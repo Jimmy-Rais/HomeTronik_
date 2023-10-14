@@ -16,7 +16,7 @@ class _roomsState extends State<rooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, //Colors.blueGrey[300],
+      backgroundColor: Colors.blueGrey[300], //Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
           top: 50,
@@ -34,18 +34,6 @@ class _roomsState extends State<rooms> {
                     color: Colors.red,
                   ),
                 ),*/
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                    left: 250,
-                  ),
-                  child: Text(
-                    "Live",
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
               ],
             ),
             height: 400,
@@ -104,8 +92,275 @@ class _roomsState extends State<rooms> {
           ),
         ),
         Positioned(
-            bottom: 70,
-            left: 30,
+            top: 60,
+            right: 15,
+            child: Row(
+              children: [
+                Container(
+                  height: 8,
+                  width: 8,
+                  color: Colors.red,
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Live',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                )
+              ],
+            )),
+        Positioned(
+            top: 50,
+            //  left: 50,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 25,
+                  color: Colors.white,
+                ))),
+        Positioned(
+            top: 110,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(left: 10),
+              child: Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: 90,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[300],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.blueGrey.shade700,
+                            // Color of the shadow
+                            spreadRadius: 1, // Spread radius of the shadow
+                            blurRadius: 10, // Blur radius of the shadow
+                            offset: Offset(3,
+                                3), // Offset of the shadow (horizontal, vertical)
+                          ),
+                          BoxShadow(
+                            color: Colors.blueGrey.shade200,
+                            // Color of the shadow
+                            spreadRadius: 1, // Spread radius of the shadow
+                            blurRadius: 10, // Blur radius of the shadow
+                            offset: Offset(-4,
+                                -4), // Offset of the shadow (horizontal, vertical)
+                          ),
+                        ],
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.blueGrey.shade200,
+                              Colors.blueGrey.shade400,
+                            ])),
+                    child: Center(
+                      child: Text(
+                        "Living room",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 30,
+                    width: 90,
+                    color: Colors.grey.withOpacity(0.9),
+                    child: Center(
+                      child: Text(
+                        "Kitchen",
+                        style: TextStyle(
+                          color: const Color.fromARGB(166, 255, 255, 255),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 30,
+                    width: 90,
+                    color: Colors.grey.withOpacity(0.9),
+                    child: Center(
+                      child: Text(
+                        "fence",
+                        style: TextStyle(
+                          color: const Color.fromARGB(166, 255, 255, 255),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 30,
+                    width: 90,
+                    color: Colors.grey.withOpacity(0.9),
+                    child: Center(
+                      child: Text(
+                        "hall",
+                        style: TextStyle(
+                          color: const Color.fromARGB(166, 255, 255, 255),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 30,
+                    width: 90,
+                    color: Colors.grey.withOpacity(0.9),
+                    child: Center(
+                      child: Text(
+                        "Kitchen",
+                        style: TextStyle(
+                          color: const Color.fromARGB(166, 255, 255, 255),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 30,
+                    width: 90,
+                    color: Colors.grey.withOpacity(0.9),
+                    child: Center(
+                      child: Text(
+                        "guest",
+                        style: TextStyle(
+                          color: const Color.fromARGB(166, 255, 255, 255),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+        Positioned(
+            top: 390,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 35),
+              child: Container(
+                height: 50,
+                width: 350,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        // bottom: 10,
+                        left: 3,
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 5),
+                            child: Text(
+                              "Living Room",
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.7),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                                fontFamily: 'Abel',
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.device_thermostat_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              Text(
+                                ':',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              DefaultTextStyle(
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 36, 208, 243),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Abel',
+                                ),
+                                child: AnimatedTextKit(
+                                  repeatForever: true,
+                                  animatedTexts: [
+                                    TypewriterAnimatedText(
+                                      '22°C',
+                                      speed: const Duration(milliseconds: 900),
+                                    ),
+                                  ],
+                                  onTap: () {
+                                    print("Tap Event");
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 190),
+                    Row(
+                      children: [
+                        Text(
+                          "AC",
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.2),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                              //left: 30,
+                              bottom: 10,
+                            ),
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.toggle_on_outlined,
+                                  color: Colors.white,
+                                  size: 30,
+                                ))),
+                      ],
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.8),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(90),
+                    )),
+              ),
+            )),
+        Positioned(
+            bottom: 40,
+            left: 25,
             child: Column(
               children: [
                 Row(
@@ -122,7 +377,7 @@ class _roomsState extends State<rooms> {
                               )),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 25,
+                              top: 40,
                             ),
                             child: Text(
                               "Lights",
@@ -133,8 +388,8 @@ class _roomsState extends State<rooms> {
                           ),
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 130,
+                      width: 160,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -207,8 +462,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 130,
+                      width: 160,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -290,8 +545,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 130,
+                      width: 160,
                       /*  decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -367,8 +622,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 130,
+                      width: 160,
                       /* decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
