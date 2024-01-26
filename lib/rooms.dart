@@ -260,10 +260,10 @@ class _roomsState extends State<rooms> {
         Positioned(
             top: 390,
             child: Padding(
-              padding: const EdgeInsets.only(left: 35),
+              padding: const EdgeInsets.only(left: 15),
               child: Container(
                 height: 50,
-                width: 350,
+                width: 340,
                 child: Row(
                   children: [
                     Padding(
@@ -360,7 +360,7 @@ class _roomsState extends State<rooms> {
             )),
         Positioned(
             bottom: 40,
-            left: 25,
+            left: 15,
             child: Column(
               children: [
                 Row(
@@ -372,24 +372,35 @@ class _roomsState extends State<rooms> {
                               onPressed: () {},
                               icon: Icon(
                                 Icons.lightbulb,
-                                size: 35,
+                                size: 30,
                                 color: Colors.yellow,
                               )),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 40,
+                              top: 10,
                             ),
-                            child: Text(
-                              "Lights",
-                              style: TextStyle(
-                                color: Colors.white,
+                            child: Row(children: [
+                              Padding(padding: EdgeInsets.only(left: 35)),
+                              Text(
+                                "Lights",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
+                              SizedBox(width: 10),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.toggle_on_outlined,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ))
+                            ]),
                           ),
                         ],
                       ),
-                      height: 130,
-                      width: 160,
+                      height: 110,
+                      width: 140,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -462,8 +473,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 130,
-                      width: 160,
+                      height: 110,
+                      width: 130,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -528,7 +539,7 @@ class _roomsState extends State<rooms> {
                               child: IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    Icons.video_camera_back,
+                                    Icons.electrical_services_sharp,
                                     size: 45,
                                     color: Colors.white,
                                   ))),
@@ -545,8 +556,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 130,
-                      width: 160,
+                      height: 110,
+                      width: 140,
                       /*  decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -611,19 +622,33 @@ class _roomsState extends State<rooms> {
                                   ))),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 24,
+                              top: 2,
                             ),
-                            child: Text(
-                              "Shutter",
-                              style: TextStyle(
-                                color: Colors.white,
+                            child: Row(children: [
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                left: 18,
+                              )),
+                              Text(
+                                "Shutter",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
+                              SizedBox(width: 15),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.toggle_on_outlined,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ))
+                            ]),
                           )
                         ],
                       ),
-                      height: 130,
-                      width: 160,
+                      height: 110,
+                      width: 140,
                       /* decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [

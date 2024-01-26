@@ -671,61 +671,67 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           )),
                     )),
                 SizedBox(width: 20),
-                Container(
-                    height: 140,
-                    width: 100,
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        /*image: DecorationImage(
-                        image: AssetImage("images/kitchen.jpg"),
-                        fit: BoxFit.cover,
-                      ),*/
-                        //borderRadius: BorderRadius.circular(30),
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                          bottomLeft: Radius.circular(30),
-                          bottomRight: Radius.circular(30),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade700,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 3, // Blur radius of the shadow
-                            offset: Offset(1,
-                                1), // Offset of the shadow (horizontal, vertical)
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 8, // Blur radius of the shadow
-                            offset: Offset(-1,
-                                -1), // Offset of the shadow (horizontal, vertical)
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.grey.shade200,
-                              Colors.grey.shade400,
-                            ])),
-                    child: Container(
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => rooms()));
+                  },
+                  child: Container(
+                      height: 140,
+                      width: 100,
+                      padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
+                          /*image: DecorationImage(
+                          image: AssetImage("images/kitchen.jpg"),
+                          fit: BoxFit.cover,
+                        ),*/
+                          //borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey[300],
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30),
                           ),
-                          image: DecorationImage(
-                            image: AssetImage("images/living.jpg"),
-                            fit: BoxFit.cover,
-                          )),
-                    )),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade700,
+                              // Color of the shadow
+                              spreadRadius: 1, // Spread radius of the shadow
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
+                            ),
+                            BoxShadow(
+                              color: Colors.grey.shade200,
+                              // Color of the shadow
+                              spreadRadius: 1, // Spread radius of the shadow
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
+                            ),
+                          ],
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.grey.shade200,
+                                Colors.grey.shade400,
+                              ])),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
+                            ),
+                            image: DecorationImage(
+                              image: AssetImage("images/living.jpg"),
+                              fit: BoxFit.cover,
+                            )),
+                      )),
+                ),
                 SizedBox(width: 20),
                 Container(
                     height: 140,
