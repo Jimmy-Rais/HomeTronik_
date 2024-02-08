@@ -1,6 +1,6 @@
 *****HomeTronik***** is an open-source Flutter app that lets you control your smart home from your smartphone. It is currently under development, but it has the potential to be a powerful and versatile smart home solution.
 
-****Features (planned)****:
+****Features****:
 
 Effortless Appliance Control: Turn on lights, adjust thermostats, and manage other connected devices with intuitive taps and swipes.
 Real-time Sensor Data: Stay informed about your home environment with live temperature, humidity, and other sensor readings.
