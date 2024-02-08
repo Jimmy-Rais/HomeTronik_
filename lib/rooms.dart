@@ -9,8 +9,9 @@ import 'speechTotext.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class rooms extends StatefulWidget {
-  rooms(this.dark_theme, this.img, {super.key});
+  rooms(this.currentStatus, this.dark_theme, this.img, {super.key});
   bool dark_theme;
+  String currentStatus;
   var img;
   @override
   State<rooms> createState() => _roomsState();
@@ -21,6 +22,7 @@ class _roomsState extends State<rooms> {
   stt.SpeechToText? _speech;
   String _text = "";
   bool _isListening = false;
+
   @override
   void initState() {
     super.initState();
@@ -410,8 +412,12 @@ class _roomsState extends State<rooms> {
                                               Speechtotext()));
                                 },
                                 icon: Icon(
-                                  Icons.toggle_on_outlined,
-                                  color: Colors.yellow,
+                                  widget.currentStatus == 'ON'
+                                      ? Icons.toggle_on_outlined
+                                      : Icons.toggle_off_outlined,
+                                  color: widget.currentStatus == 'ON'
+                                      ? Colors.yellow
+                                      : Colors.grey,
                                   size: 30,
                                 ))),
                       ],
