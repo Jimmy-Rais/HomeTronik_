@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class BoxDecorator extends StatelessWidget {
-   BoxDecorator(this.theme, {super.key});
+  BoxDecorator(this.theme, {super.key});
   bool theme;
   @override
   Widget build(BuildContext context) {
-    return BoxDecoration(
+    return Container();
+    /* return BoxDecoration(
 
                         //borderRadius: BorderRadius.circular(30),
                        // color: Colors.blueGrey[300],
@@ -46,5 +47,6 @@ class BoxDecorator extends StatelessWidget {
                                   ? Colors.black
                                   : Colors.blueGrey.shade400,
                             ])),();
+  }*/
   }
 }
