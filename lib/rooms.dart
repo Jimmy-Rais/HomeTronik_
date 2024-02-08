@@ -417,7 +417,7 @@ class _roomsState extends State<rooms> {
                                       : Icons.toggle_off_outlined,
                                   color: widget.currentStatus == 'ON'
                                       ? Colors.yellow
-                                      : Colors.grey,
+                                      : Colors.white,
                                   size: 30,
                                 ))),
                       ],
@@ -448,18 +448,27 @@ class _roomsState extends State<rooms> {
                                   onPressed: () {},
                                   icon: Icon(
                                     Icons.lightbulb_rounded,
-                                    size: 30,
-                                    color: Colors.yellow,
+                                    size:
+                                        widget.currentStatus == 'ON' ? 30 : 20,
+                                    color: widget.currentStatus == 'ON'
+                                        ? Colors.yellow
+                                        : Colors.white,
                                   )),
                               SizedBox(width: 20),
                               IconButton(
                                   onPressed: () {
                                     flutterTts.speak('Light switched  on');
+                                    widget.currentStatus == 'ON' ? 'OFF' : 'ON';
+                                    print(widget.currentStatus);
                                   },
                                   icon: Icon(
-                                    Icons.toggle_on_outlined,
-                                    size: 25,
-                                    color: Colors.yellow,
+                                    widget.currentStatus == 'ON'
+                                        ? Icons.toggle_on_outlined
+                                        : Icons.toggle_off_outlined,
+                                    color: widget.currentStatus == 'ON'
+                                        ? Colors.yellow
+                                        : Colors.white,
+                                    size: 30,
                                   ))
                             ],
                           ),
