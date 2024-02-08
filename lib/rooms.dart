@@ -6,6 +6,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'speechTotext.dart';
+import 'main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class rooms extends StatefulWidget {
@@ -22,12 +23,13 @@ class _roomsState extends State<rooms> {
   stt.SpeechToText? _speech;
   String _text = "";
   bool _isListening = false;
-
+  bool led = false;
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
     _listen();
+    _led();
   }
 
   void _listen() async {
@@ -57,6 +59,12 @@ class _roomsState extends State<rooms> {
       setState(() => _isListening = false);
       _speech!.stop();
     }
+  }
+
+  void _led() {
+    setState(() {
+      led = !led;
+    });
   }
 
   @override
@@ -448,26 +456,22 @@ class _roomsState extends State<rooms> {
                                   onPressed: () {},
                                   icon: Icon(
                                     Icons.lightbulb_rounded,
-                                    size:
-                                        widget.currentStatus == 'ON' ? 30 : 20,
-                                    color: widget.currentStatus == 'ON'
-                                        ? Colors.yellow
-                                        : Colors.white,
+                                    size: led ? 30 : 20,
+                                    color: led ? Colors.yellow : Colors.white,
                                   )),
                               SizedBox(width: 20),
                               IconButton(
                                   onPressed: () {
                                     flutterTts.speak('Light switched  on');
-                                    widget.currentStatus == 'ON' ? 'OFF' : 'ON';
-                                    print(widget.currentStatus);
+                                    setState(() {
+                                      _led();
+                                    });
                                   },
                                   icon: Icon(
-                                    widget.currentStatus == 'ON'
+                                    led
                                         ? Icons.toggle_on_outlined
                                         : Icons.toggle_off_outlined,
-                                    color: widget.currentStatus == 'ON'
-                                        ? Colors.yellow
-                                        : Colors.white,
+                                    color: led ? Colors.yellow : Colors.white,
                                     size: 30,
                                   ))
                             ],
