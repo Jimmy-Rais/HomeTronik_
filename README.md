@@ -1,4 +1,9 @@
 *****Smart House app***** ,*****HomeTronik***** is an open-source Flutter app that lets you control your smart home from your smartphone. It is currently under development, but it has the potential to be a powerful and versatile smart home solution.
+*****Screens demo***** 
+    **1.HomeScreen**:
+![Capture d’écran (75)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/70805f75-7078-456d-bddf-697ed5162903)
+    **2.Rooms**:
+![Capture d’écran (39)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/88680625-2b22-45ce-9efc-7edfb4329ca9)
 
 ****Features****:
 
