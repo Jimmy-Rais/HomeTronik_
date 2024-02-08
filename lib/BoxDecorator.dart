@@ -8,8 +8,8 @@ class BoxDecorator extends StatelessWidget {
     return BoxDecoration(
 
                         //borderRadius: BorderRadius.circular(30),
-                        color: Colors.blueGrey[300],
-                        borderRadius: BorderRadius.only(
+                       // color: Colors.blueGrey[300],
+                        //borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                           bottomLeft: Radius.circular(10),
