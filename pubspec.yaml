@@ -41,6 +41,10 @@ dev_dependencies:
     sdk: flutter
   animated_text_kit: ^4.2.2  
   font_awesome_flutter: ^10.5.0
+  flutter_tts: ^3.8.5
+  speech_to_text: ^6.6.0
+  highlight_text: ^1.7.0
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -63,6 +67,7 @@ flutter:
   assets:
     - images/jim.JPG
     - images/home.jpeg
+    - images/home2.jpg
     - images/kitchen.jpg
     - images/guest.jpg
     - images/living.jpg

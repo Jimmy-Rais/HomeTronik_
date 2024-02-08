@@ -40,7 +40,7 @@ class _signinState extends State<signin> {
         width: 2000,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/home.jpeg"),
+            image: AssetImage("images/home2.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -58,10 +58,10 @@ class _signinState extends State<signin> {
               ) */
       SizedBox(height: 85),
       Positioned(
-          right: 10,
-          top: 200,
+          right: 50,
+          bottom: 110,
           child: Column(children: [
-            Container(
+            /* Container(
               alignment: Alignment(0.2, 0.4),
               padding: EdgeInsets.only(left: 10),
               child: Text(
@@ -85,8 +85,8 @@ class _signinState extends State<signin> {
                             borderSide:
                                 const BorderSide(color: Colors.black, width: 1),
                             borderRadius: BorderRadius.circular(18))))),
-            SizedBox(height: 45),
-            Container(
+            SizedBox(height: 45),*/
+            /*Container(
               width: 380,
               child: TextField(
                 controller: passwordController,
@@ -101,8 +101,8 @@ class _signinState extends State<signin> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
-            Container(
+            SizedBox(height: 30),*/
+            /* Container(
               padding: EdgeInsets.only(right: 210),
               child: TextButton(
                   onPressed: () {},
@@ -114,28 +114,72 @@ class _signinState extends State<signin> {
                     ),
                   )),
             ),
-            SizedBox(height: 75),
-            Container(
+            SizedBox(height: 75),*/
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyHomePage2()));
+              },
+              child: Container(
                 padding: EdgeInsets.only(left: 30),
-                width: 280,
-                height: 50,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 69, 172, 201),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18), // <-- Radius
+                width: 250,
+                height: 70,
+                decoration: BoxDecoration(
+                    color: Colors.blueGrey[300],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.shade700,
+                        // Color of the shadow
+                        spreadRadius: 1, // Spread radius of the shadow
+                        blurRadius: 10, // Blur radius of the shadow
+                        offset: Offset(3,
+                            3), // Offset of the shadow (horizontal, vertical)
                       ),
-                    ),
-                    child: Text(
-                      'Log in',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        // fontWeight: FontWeight.bold,
+                      BoxShadow(
+                        color: Colors.blueGrey.shade200,
+                        // Color of the shadow
+                        spreadRadius: 1, // Spread radius of the shadow
+                        blurRadius: 10, // Blur radius of the shadow
+                        offset: Offset(-4,
+                            -4), // Offset of the shadow (horizontal, vertical)
                       ),
-                    ))),
-            SizedBox(height: 80),
+                    ],
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.black,
+                          Colors.black,
+                        ])),
+                child: Center(
+                  child: Text(
+                    "",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ), /*ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage2()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18), // <-- Radius
+                        ),
+                      ),
+                      child: Text(
+                        'Let me in',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          // fontWeight: FontWeight.bold,
+                        ),
+                      ))*/
+              ),
+            ),
+            /* SizedBox(height: 80),
             Row(children: [
               Container(
                 padding: EdgeInsets.only(left: 66),
@@ -161,7 +205,7 @@ class _signinState extends State<signin> {
                       fontSize: 15,
                     ),
                   ))
-            ])
+            ])*/
           ]))
     ])));
   }

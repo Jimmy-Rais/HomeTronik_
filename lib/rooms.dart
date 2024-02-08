@@ -4,22 +4,67 @@ import 'package:firebase_core/firebase_core.dart';
 import 'signin.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'speechTotext.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class rooms extends StatefulWidget {
-  const rooms({super.key});
-
+  rooms(this.dark_theme, this.img, {super.key});
+  bool dark_theme;
+  var img;
   @override
   State<rooms> createState() => _roomsState();
 }
 
 class _roomsState extends State<rooms> {
+  final FlutterTts flutterTts = FlutterTts();
+  stt.SpeechToText? _speech;
+  String _text = "";
+  bool _isListening = false;
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+    _listen();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech!.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech!.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+
+            if (_text == "Jimmy") {
+              flutterTts.speak(
+                  'Welcome to HomeTronik,a new SmartHome experience.To switch on a device(For example Light,Fan,AC,Socket,Smart tv) say SWITCH ON Device name or click on the corresponding button...To switch it off ,say SWITCH OFF Device name or click on the corresponding Button.For example: Switch on Light.Switch off Light. To know the temperature of the room,say TEMPERATURE...Let me know if you need to know something else');
+            } else if (_text == "Switch on light") {
+              flutterTts.speak(
+                  'Welcome to HomeTronik,a  SmartHome experience.To switch on a device(For example Light,Fan,AC,Socket,Smart tv) say SWITCH ON Device name...To switch it off ,say SWITCH OFF Device name.For example: Switch on Light.Switch off Light. To know the temperature of the room,say TEMPERATURE...Let me know if you need to know something else');
+            }
+            _isListening = true;
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech!.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[300], //Colors.blueGrey[300],
+      backgroundColor: widget.dark_theme ? Colors.black : Colors.blueGrey[300],
+      // // Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
-          top: 50,
+          top: 0,
           // left: 10,
           child: Container(
             child: Column(
@@ -57,11 +102,11 @@ class _roomsState extends State<rooms> {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(45),
+                  bottomRight: Radius.circular(120),
                 ),
                 image: DecorationImage(
-                  image: AssetImage("images/living.jpg"),
+                  image: AssetImage(widget.img),
                   fit: BoxFit.cover,
                 ),
                 boxShadow: [
@@ -115,19 +160,28 @@ class _roomsState extends State<rooms> {
               ],
             )),
         Positioned(
-            top: 50,
+            top: 40,
             //  left: 50,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 25,
-                  color: Colors.white,
-                ))),
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 20,
+                      color: Colors.white,
+                    )),
+                SizedBox(width: 50),
+                IconButton(
+                  onPressed: _listen,
+                  icon: Icon(_isListening! ? Icons.mic : Icons.mic_none),
+                ),
+              ],
+            )),
         Positioned(
-            top: 110,
+            top: 90,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(left: 10),
@@ -140,7 +194,9 @@ class _roomsState extends State<rooms> {
                         color: Colors.blueGrey[300],
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.blueGrey.shade700,
+                            color: widget.dark_theme
+                                ? Colors.blueGrey.shade700
+                                : Colors.grey,
                             // Color of the shadow
                             spreadRadius: 1, // Spread radius of the shadow
                             blurRadius: 10, // Blur radius of the shadow
@@ -160,8 +216,12 @@ class _roomsState extends State<rooms> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Colors.blueGrey.shade200,
-                              Colors.blueGrey.shade400,
+                              widget.dark_theme
+                                  ? Colors.black
+                                  : Colors.blueGrey.shade200,
+                              widget.dark_theme
+                                  ? Colors.black
+                                  : Colors.blueGrey.shade400,
                             ])),
                     child: Center(
                       child: Text(
@@ -183,7 +243,7 @@ class _roomsState extends State<rooms> {
                       child: Text(
                         "Kitchen",
                         style: TextStyle(
-                          color: const Color.fromARGB(166, 255, 255, 255),
+                          color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                         ),
@@ -199,7 +259,7 @@ class _roomsState extends State<rooms> {
                       child: Text(
                         "fence",
                         style: TextStyle(
-                          color: const Color.fromARGB(166, 255, 255, 255),
+                          color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                         ),
@@ -215,7 +275,7 @@ class _roomsState extends State<rooms> {
                       child: Text(
                         "hall",
                         style: TextStyle(
-                          color: const Color.fromARGB(166, 255, 255, 255),
+                          color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                         ),
@@ -231,7 +291,7 @@ class _roomsState extends State<rooms> {
                       child: Text(
                         "Kitchen",
                         style: TextStyle(
-                          color: const Color.fromARGB(166, 255, 255, 255),
+                          color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                         ),
@@ -258,10 +318,11 @@ class _roomsState extends State<rooms> {
               ),
             )),
         Positioned(
-            top: 390,
+            top: 330,
             child: Padding(
               padding: const EdgeInsets.only(left: 15),
               child: Container(
+                //  color: const Color.fromARGB(86, 158, 158, 158),
                 height: 50,
                 width: 340,
                 child: Row(
@@ -330,7 +391,7 @@ class _roomsState extends State<rooms> {
                         Text(
                           "AC",
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                           ),
@@ -341,10 +402,16 @@ class _roomsState extends State<rooms> {
                               bottom: 10,
                             ),
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Speechtotext()));
+                                },
                                 icon: Icon(
                                   Icons.toggle_on_outlined,
-                                  color: Colors.white,
+                                  color: Colors.yellow,
                                   size: 30,
                                 ))),
                       ],
@@ -352,15 +419,15 @@ class _roomsState extends State<rooms> {
                   ],
                 ),
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.8),
+                    color: Color.fromARGB(170, 135, 134, 134).withOpacity(0.9),
                     borderRadius: BorderRadius.all(
                       Radius.circular(90),
                     )),
               ),
             )),
         Positioned(
-            bottom: 40,
-            left: 15,
+            bottom: 30,
+            left: 20,
             child: Column(
               children: [
                 Row(
@@ -368,39 +435,46 @@ class _roomsState extends State<rooms> {
                     Container(
                       child: Column(
                         children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.lightbulb,
-                                size: 30,
-                                color: Colors.yellow,
-                              )),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10,
-                            ),
-                            child: Row(children: [
-                              Padding(padding: EdgeInsets.only(left: 35)),
-                              Text(
-                                "Lights",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
+                          Row(
+                            children: [
                               SizedBox(width: 10),
                               IconButton(
                                   onPressed: () {},
                                   icon: Icon(
+                                    Icons.lightbulb_rounded,
+                                    size: 30,
+                                    color: Colors.yellow,
+                                  )),
+                              SizedBox(width: 20),
+                              IconButton(
+                                  onPressed: () {
+                                    flutterTts.speak('Light switched  on');
+                                  },
+                                  icon: Icon(
                                     Icons.toggle_on_outlined,
                                     size: 25,
-                                    color: Colors.white,
+                                    color: Colors.yellow,
                                   ))
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 60,
+                            ),
+                            child: Row(children: [
+                              Padding(padding: EdgeInsets.only(left: 35)),
+                              Text(
+                                "Light Bulbs",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ]),
                           ),
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 140,
+                      width: 150,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -445,27 +519,45 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blueGrey.shade200,
-                                Colors.blueGrey.shade400,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade200,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade400,
+                                //Colors.blueGrey.shade200,
+                                //Colors.blueGrey.shade400,
                               ])),
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: 25),
                     Container(
                       child: Column(
                         children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.toggle_off,
-                                size: 55,
-                                color: Colors.white,
-                              )),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.mode_fan_off_outlined,
+                                    size: 30,
+                                    color: Colors.white,
+                                  )),
+                              SizedBox(width: 40),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.toggle_off_outlined,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ))
+                            ],
+                          ),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 25,
+                              top: 60,
                             ),
                             child: Text(
-                              "Air Conditionners",
+                              "Fans",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -473,8 +565,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 130,
+                      height: 140,
+                      width: 150,
                       /*decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -519,13 +611,17 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blueGrey.shade200,
-                                Colors.blueGrey.shade400,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade200,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade400,
                               ])),
                     ),
                   ],
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Container(
@@ -536,16 +632,29 @@ class _roomsState extends State<rooms> {
                                 top: 10,
                                 right: 5,
                               ),
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.electrical_services_sharp,
-                                    size: 45,
-                                    color: Colors.white,
-                                  ))),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 15),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.electrical_services_sharp,
+                                        size: 35,
+                                        color: Colors.white,
+                                      )),
+                                  SizedBox(width: 20),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.toggle_off_outlined,
+                                        size: 25,
+                                        color: Colors.white,
+                                      )),
+                                ],
+                              )),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 22,
+                              top: 55,
                             ),
                             child: Text(
                               "Sockets",
@@ -556,8 +665,8 @@ class _roomsState extends State<rooms> {
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 140,
+                      width: 150,
                       /*  decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -600,11 +709,15 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blueGrey.shade200,
-                                Colors.blueGrey.shade400,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade200,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade400,
                               ])),
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: 30),
                     Container(
                       child: Column(
                         children: [
@@ -613,13 +726,26 @@ class _roomsState extends State<rooms> {
                                 top: 8,
                                 right: 15,
                               ),
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.window_outlined,
-                                    size: 45,
-                                    color: Colors.white,
-                                  ))),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.window_outlined,
+                                        size: 35,
+                                        color: Colors.white,
+                                      )),
+                                  SizedBox(width: 15),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.toggle_off_outlined,
+                                        size: 25,
+                                        color: Colors.white,
+                                      )),
+                                ],
+                              )),
                           Padding(
                             padding: EdgeInsets.only(
                               top: 2,
@@ -627,7 +753,8 @@ class _roomsState extends State<rooms> {
                             child: Row(children: [
                               Padding(
                                   padding: EdgeInsets.only(
-                                left: 18,
+                                left: 45,
+                                top: 80,
                               )),
                               Text(
                                 "Shutter",
@@ -635,20 +762,12 @@ class _roomsState extends State<rooms> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(width: 15),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.toggle_on_outlined,
-                                    size: 25,
-                                    color: Colors.white,
-                                  ))
                             ]),
                           )
                         ],
                       ),
-                      height: 110,
-                      width: 140,
+                      height: 140,
+                      width: 150,
                       /* decoration: BoxDecoration(
                           color: Color.fromRGBO(1, 16, 26, 1),
                           boxShadow: [
@@ -693,8 +812,14 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blueGrey.shade200,
-                                Colors.blueGrey.shade400,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade200,
+                                widget.dark_theme
+                                    ? Colors.black
+                                    : Colors.blueGrey.shade400,
+                                //Colors.blueGrey.shade200,
+                                //Colors.blueGrey.shade400,
                               ])),
                     ),
                   ],
