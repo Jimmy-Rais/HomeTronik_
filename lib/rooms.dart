@@ -8,6 +8,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'speechTotext.dart';
 import 'main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'appliances.dart';
 
 class rooms extends StatefulWidget {
   rooms(this.currentStatus, this.dark_theme, this.img, {super.key});
@@ -19,6 +20,17 @@ class rooms extends StatefulWidget {
 }
 
 class _roomsState extends State<rooms> {
+  DatabaseReference ledStatusRef =
+      FirebaseDatabase.instance.reference().child('LED_STATUS');
+  DatabaseReference TempStatusRef =
+      FirebaseDatabase.instance.reference().child('Temperature');
+  DatabaseReference HumRef =
+      FirebaseDatabase.instance.reference().child('Humidity');
+  /*Initialization of appliances states variables*/
+  String currentStatus = 'Loading...';
+  double TempStatus = 0.0;
+  int HumStatus = 0;
+  bool my_led = false;
   final FlutterTts flutterTts = FlutterTts();
   stt.SpeechToText? _speech;
   String _text = "";
@@ -27,9 +39,25 @@ class _roomsState extends State<rooms> {
   @override
   void initState() {
     super.initState();
+    _loadLEDStatus();
     _speech = stt.SpeechToText();
     _listen();
     _led();
+  }
+
+  _loadLEDStatus() async {
+    DatabaseEvent event = await ledStatusRef.once();
+    if (event.snapshot.value != null) {
+      //led_stat represents the boolean status of the led retrieved from the database
+      bool? led_stat = bool.tryParse(event.snapshot.value.toString());
+      setState(() {
+        /*Everytime the function is called,assign the toogle  command recieved
+         to the database state*/
+        led_stat = led;
+        currentStatus = event.snapshot.value.toString();
+        print('The new state $led_stat');
+      });
+    }
   }
 
   void _listen() async {
@@ -453,7 +481,11 @@ class _roomsState extends State<rooms> {
                             children: [
                               SizedBox(width: 10),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    //Send the toogle command to the appliance widget
+                                    //appliances(led);
+                                    ();
+                                  },
                                   icon: Icon(
                                     Icons.lightbulb_rounded,
                                     size: led ? 30 : 20,
@@ -465,6 +497,7 @@ class _roomsState extends State<rooms> {
                                     flutterTts.speak('Light switched  on');
                                     setState(() {
                                       _led();
+                                      _loadLEDStatus();
                                     });
                                   },
                                   icon: Icon(

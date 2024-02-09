@@ -1,3 +1,6 @@
+/*
+BoxDecoration widget with BoxShadow and Linear Gradient
+*/
 import 'package:flutter/material.dart';
 
 class BoxDecorator extends StatelessWidget {
