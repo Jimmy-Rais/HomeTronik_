@@ -1,0 +1,4 @@
+/*
+Widget that return the states of all the appliances and receive toogle command from buttons
+
+*/

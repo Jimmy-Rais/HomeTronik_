@@ -1,5 +1,5 @@
 /*
-Created by Rais Gachaba Jimmy
+Created by Rais Gachaba Jimmy    
 */
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -34,14 +34,6 @@ class MyHomePage2 extends StatefulWidget {
 class _MyHomePage2State extends State<MyHomePage2> {
   bool dark_theme = false;
   bool newdarktheme = false;
-  /*- images/home.jpeg
-    - images/home2.jpg
-    - images/kitchen.jpg
-    - images/guest.jpg
-    - images/living.jpg
-    - images/fence.jpg
-    - images/hall.png
-    - images/out.jpg*/
   var kitchen = "images/kitchen.jpg";
   var guest = "images/guest.jpg";
   var living = "images/living.jpg";
