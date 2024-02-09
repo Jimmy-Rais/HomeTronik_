@@ -539,8 +539,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, kitchen)));
+                            builder: (context) => rooms(dark_theme, kitchen)));
                   },
                   child: Container(
                       height: 250,
@@ -603,8 +602,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, living)));
+                            builder: (context) => rooms(dark_theme, living)));
                   },
                   child: Container(
                       height: 250,
@@ -663,8 +661,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, guest)));
+                            builder: (context) => rooms(dark_theme, guest)));
                   },
                   child: Container(
                       height: 250,
@@ -728,8 +725,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, fence)));
+                            builder: (context) => rooms(dark_theme, fence)));
                   },
                   child: Container(
                       height: 250,
@@ -793,8 +789,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, fence)));
+                            builder: (context) => rooms(dark_theme, fence)));
                   },
                   child: Container(
                       height: 250,
@@ -858,8 +853,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                rooms(currentStatus, dark_theme, out)));
+                            builder: (context) => rooms(dark_theme, out)));
                   },
                   child: Container(
                       height: 250,

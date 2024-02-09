@@ -41,22 +41,26 @@ class _appliancesState extends State<appliances> {
   void initState() {
     super.initState();
 
-    _loadLEDStatus();
+    loadLEDStatus();
     _loadTempStatus();
     _loadHumStatus();
   }
 
-  _loadLEDStatus() async {
+  loadLEDStatus() async {
     DatabaseEvent event = await ledStatusRef.once();
+
     if (event.snapshot.value != null) {
-      //led_stat represents the boolean status of the led retrieved from the database
+      /*
+      led_stat represents the boolean status of the led retrieved from the database
+      The below line retrieve the appliance state and stores it in a boolean variable
+      */
       bool? led_stat = bool.tryParse(event.snapshot.value.toString());
+      await ledStatusRef.set(widget
+          .toogle_led); //Toggle the appliance state according to the button state
       setState(() {
         /*Everytime the function is called,assign the toogle  command recieved
          to the database state*/
-        led_stat != led_stat!;
-        currentStatus = event.snapshot.value.toString();
-        print('The new state $led_stat');
+        led_stat = widget.toogle_led;
       });
     }
   }

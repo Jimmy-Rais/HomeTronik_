@@ -6,58 +6,56 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'speechTotext.dart';
-import 'main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'appliances.dart';
 
+/*
+Global variables declaration: Database path reference for appliances
+*/
+DatabaseReference acStatusRef =
+    FirebaseDatabase.instance.reference().child('AC_STATUS');
+DatabaseReference fanStatusRef =
+    FirebaseDatabase.instance.reference().child('FAN_STATUS');
+DatabaseReference ledStatusRef =
+    FirebaseDatabase.instance.reference().child('LED_STATUS');
+DatabaseReference TempStatusRef =
+    FirebaseDatabase.instance.reference().child('Temperature');
+DatabaseReference HumRef =
+    FirebaseDatabase.instance.reference().child('Humidity');
+double TempStatus = 0.0;
+int HumStatus = 0;
+
+//Rooms widget: Takes as parameter the main theme and the image of the room
 class rooms extends StatefulWidget {
-  rooms(this.currentStatus, this.dark_theme, this.img, {super.key});
-  bool dark_theme;
-  String currentStatus;
-  var img;
+  rooms(this.dark_theme, this.img, {super.key});
+  bool dark_theme; //main theme,dark or light
+  var img; //Room image
   @override
   State<rooms> createState() => _roomsState();
 }
 
 class _roomsState extends State<rooms> {
-  DatabaseReference ledStatusRef =
-      FirebaseDatabase.instance.reference().child('LED_STATUS');
-  DatabaseReference TempStatusRef =
-      FirebaseDatabase.instance.reference().child('Temperature');
-  DatabaseReference HumRef =
-      FirebaseDatabase.instance.reference().child('Humidity');
   /*Initialization of appliances states variables*/
-  String currentStatus = 'Loading...';
-  double TempStatus = 0.0;
-  int HumStatus = 0;
-  bool my_led = false;
+
+  //Flutter text to speech object creation
   final FlutterTts flutterTts = FlutterTts();
   stt.SpeechToText? _speech;
   String _text = "";
   bool _isListening = false;
+  //Initialize boolean variables associated to appliances states
   bool led = false;
+  bool fan = false;
+  bool ac = false;
+  bool socket = false;
+  bool shutter = false;
   @override
   void initState() {
     super.initState();
-    _loadLEDStatus();
     _speech = stt.SpeechToText();
     _listen();
     _led();
-  }
-
-  _loadLEDStatus() async {
-    DatabaseEvent event = await ledStatusRef.once();
-    if (event.snapshot.value != null) {
-      //led_stat represents the boolean status of the led retrieved from the database
-      bool? led_stat = bool.tryParse(event.snapshot.value.toString());
-      setState(() {
-        /*Everytime the function is called,assign the toogle  command recieved
-         to the database state*/
-        led_stat = led;
-        currentStatus = event.snapshot.value.toString();
-        print('The new state $led_stat');
-      });
-    }
+    _ac();
+    _fan();
   }
 
   void _listen() async {
@@ -89,9 +87,25 @@ class _roomsState extends State<rooms> {
     }
   }
 
+// Functions that toggle the appliances states
   void _led() {
     setState(() {
       led = !led;
+      ledStatusRef.set(led);
+    });
+  }
+
+  void _ac() {
+    setState(() {
+      ac = !ac;
+      acStatusRef.set(ac);
+    });
+  }
+
+  void _fan() {
+    setState(() {
+      fan = !fan;
+      fanStatusRef.set(fan);
     });
   }
 
@@ -106,33 +120,10 @@ class _roomsState extends State<rooms> {
           // left: 10,
           child: Container(
             child: Column(
-              children: [
-                /* Padding(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                    left: 210,
-                  ),
-                  child: Icon(
-                    Icons.video_camera_back,
-                    color: Colors.red,
-                  ),
-                ),*/
-              ],
+              children: [],
             ),
             height: 400,
             width: 410,
-            /*decoration: BoxDecoration(
-                          color: Color.fromRGBO(1, 16, 26, 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 2, // Spread radius of the shadow
-                              blurRadius: 5, // Blur radius of the shadow
-                              offset: Offset(-2,
-                                  -2), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ]),*/
             decoration: BoxDecoration(
 
                 //borderRadius: BorderRadius.circular(30),
@@ -448,12 +439,10 @@ class _roomsState extends State<rooms> {
                                               Speechtotext()));
                                 },
                                 icon: Icon(
-                                  widget.currentStatus == 'ON'
+                                  ac
                                       ? Icons.toggle_on_outlined
                                       : Icons.toggle_off_outlined,
-                                  color: widget.currentStatus == 'ON'
-                                      ? Colors.yellow
-                                      : Colors.white,
+                                  color: ac ? Colors.blue : Colors.white,
                                   size: 30,
                                 ))),
                       ],
@@ -497,7 +486,7 @@ class _roomsState extends State<rooms> {
                                     flutterTts.speak('Light switched  on');
                                     setState(() {
                                       _led();
-                                      _loadLEDStatus();
+                                      //_loadLEDStatus();
                                     });
                                   },
                                   icon: Icon(
@@ -527,18 +516,6 @@ class _roomsState extends State<rooms> {
                       ),
                       height: 140,
                       width: 150,
-                      /*decoration: BoxDecoration(
-                          color: Color.fromRGBO(1, 16, 26, 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 2, // Spread radius of the shadow
-                              blurRadius: 5, // Blur radius of the shadow
-                              offset: Offset(-2,
-                                  -2), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ]),*/
                       decoration: BoxDecoration(
 
                           //borderRadius: BorderRadius.circular(30),
@@ -596,11 +573,15 @@ class _roomsState extends State<rooms> {
                                   )),
                               SizedBox(width: 40),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _fan();
+                                  },
                                   icon: Icon(
-                                    Icons.toggle_off_outlined,
+                                    fan
+                                        ? Icons.toggle_on_outlined
+                                        : Icons.toggle_off_outlined,
+                                    color: fan ? Colors.blue : Colors.white,
                                     size: 25,
-                                    color: Colors.white,
                                   ))
                             ],
                           ),
@@ -619,18 +600,6 @@ class _roomsState extends State<rooms> {
                       ),
                       height: 140,
                       width: 150,
-                      /*decoration: BoxDecoration(
-                          color: Color.fromRGBO(1, 16, 26, 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 2, // Spread radius of the shadow
-                              blurRadius: 5, // Blur radius of the shadow
-                              offset: Offset(2,
-                                  -2), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ]),*/
                       decoration: BoxDecoration(
 
                           //borderRadius: BorderRadius.circular(30),
@@ -719,18 +688,6 @@ class _roomsState extends State<rooms> {
                       ),
                       height: 140,
                       width: 150,
-                      /*  decoration: BoxDecoration(
-                          color: Color.fromRGBO(1, 16, 26, 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 2, // Spread radius of the shadow
-                              blurRadius: 5, // Blur radius of the shadow
-                              offset: Offset(-2,
-                                  -2), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ]),*/
                       decoration: BoxDecoration(
                           color: Colors.blueGrey[300],
                           borderRadius: BorderRadius.only(
@@ -820,18 +777,6 @@ class _roomsState extends State<rooms> {
                       ),
                       height: 140,
                       width: 150,
-                      /* decoration: BoxDecoration(
-                          color: Color.fromRGBO(1, 16, 26, 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 2, // Spread radius of the shadow
-                              blurRadius: 5, // Blur radius of the shadow
-                              offset: Offset(2,
-                                  -2), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ]),*/
                       decoration: BoxDecoration(
 
                           //borderRadius: BorderRadius.circular(30),
@@ -878,59 +823,7 @@ class _roomsState extends State<rooms> {
                 ),
               ],
             )),
-        /*  Positioned(
-            bottom: 290,
-            left: 25,
-            child: Text(
-              "Devices",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-              ),
-            )),
-        Positioned(
-          bottom: 280,
-          right: 10,
-          child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.add,
-                size: 30,
-                color: Colors.white,
-              )),
-        ),*/
-      ]), /*Stack(
-        children: <Widget>[
-          Container(
-            height: 850,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
-              ),
-              image: DecorationImage(
-                image: AssetImage("images/home.jpeg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            //child: Image(image: AssetImage("images/avatar/home.jpeg")),
-          ),
-          Positioned(
-              bottom: 0,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 350,
-                decoration: BoxDecoration(
-                    color: Colors.blueGrey.shade700,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                    )),
-              ))
-        ],
-      ),*/
+      ]),
     );
   }
 }
