@@ -1,5 +1,7 @@
 *****Smart House app***** ,*****HomeTronik***** is an open-source Flutter app that lets you control your smart home from your smartphone. It is currently under development, but it has the potential to be a powerful and versatile smart home solution.
+
 *****Screens demo***** 
+
     **1.HomeScreen**:
 ![Capture d’écran (75)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/70805f75-7078-456d-bddf-697ed5162903)
     **2.Rooms**:
@@ -7,11 +9,15 @@
 
 ****Features****:
 
-Effortless Appliance Control: Turn on lights, adjust thermostats, and manage other connected devices with intuitive taps and swipes.
+**Effortless Appliance Control**: Turn on lights, adjust thermostats, and manage other connected devices with intuitive taps and swipes.
 Real-time Sensor Data: Stay informed about your home environment with live temperature, humidity, and other sensor readings.
-Enhanced Security: Keep an eye on things with integrated camera support. Receive alerts and view live feeds for peace of mind.
+
+**Voice assistant**:Switch on and off devices using voice and get sensor data using voice commands
+
+**Enhanced Security**: Keep an eye on things with integrated camera support. Receive alerts and view live feeds for peace of mind.
 ESP32 Compatibility: Build your smart home on a secure and affordable platform with seamless ESP32 integration.
-Intuitive and User-Friendly: Enjoy a clean and easy-to-navigate interface that makes controlling your smart home a breeze.
+
+**Intuitive and User-Friendly**: Enjoy a clean and easy-to-navigate interface that makes controlling your smart home a breeze.
 Get Involved:
 
 ****Contribute Code****: Whether you're a seasoned developer or just starting out, your contributions are welcome! Fork the repository and add your magic to HomeTronik's codebase.
