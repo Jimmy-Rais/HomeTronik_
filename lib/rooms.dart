@@ -211,7 +211,7 @@ class _roomsState extends State<rooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.dark_theme ? Colors.black : Colors.blueGrey[300],
+      backgroundColor: widget.dark_theme ? Colors.black : Colors.white,
       // // Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
@@ -331,7 +331,7 @@ class _roomsState extends State<rooms> {
                               boxShadow: [
                                 BoxShadow(
                                   color: widget.dark_theme
-                                      ? Colors.blueGrey.shade700
+                                      ? Colors.white
                                       : Colors.grey,
                                   // Color of the shadow
                                   spreadRadius:
@@ -356,10 +356,10 @@ class _roomsState extends State<rooms> {
                                   colors: [
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade200,
+                                        : Colors.white,
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade400,
+                                        : Colors.white,
                                   ]))
                           : BoxDecoration(
                               color: Colors.grey.withOpacity(0.9),
@@ -368,7 +368,8 @@ class _roomsState extends State<rooms> {
                         child: Text(
                           "Living room",
                           style: TextStyle(
-                            color: Colors.white,
+                            color:
+                                widget.dark_theme ? Colors.white : Colors.black,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
@@ -418,10 +419,10 @@ class _roomsState extends State<rooms> {
                                   colors: [
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade200,
+                                        : Colors.white,
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade400,
+                                        : Colors.white,
                                   ]))
                           : BoxDecoration(
                               color: Colors.grey.withOpacity(0.9),
@@ -430,7 +431,8 @@ class _roomsState extends State<rooms> {
                         child: Text(
                           "Kitchen",
                           style: TextStyle(
-                            color: Colors.white,
+                            color:
+                                widget.dark_theme ? Colors.white : Colors.black,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
@@ -480,10 +482,10 @@ class _roomsState extends State<rooms> {
                                   colors: [
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade200,
+                                        : Colors.white,
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade400,
+                                        : Colors.white,
                                   ]))
                           : BoxDecoration(
                               color: Colors.grey.withOpacity(0.9),
@@ -492,7 +494,8 @@ class _roomsState extends State<rooms> {
                         child: Text(
                           "fence",
                           style: TextStyle(
-                            color: Colors.white,
+                            color:
+                                widget.dark_theme ? Colors.white : Colors.black,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
@@ -542,10 +545,10 @@ class _roomsState extends State<rooms> {
                                   colors: [
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade200,
+                                        : Colors.white,
                                     widget.dark_theme
                                         ? Colors.black
-                                        : Colors.blueGrey.shade400,
+                                        : Colors.white,
                                   ]))
                           : BoxDecoration(
                               color: Colors.grey.withOpacity(0.9),
@@ -554,7 +557,8 @@ class _roomsState extends State<rooms> {
                         child: Text(
                           "hall",
                           style: TextStyle(
-                            color: Colors.white,
+                            color:
+                                widget.dark_theme ? Colors.white : Colors.black,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
@@ -692,7 +696,13 @@ class _roomsState extends State<rooms> {
                                   ac
                                       ? Icons.toggle_on_outlined
                                       : Icons.toggle_off_outlined,
-                                  color: ac ? Colors.yellow : Colors.white,
+                                  color: widget.dark_theme
+                                      ? ac
+                                          ? Colors.yellow
+                                          : Colors.white
+                                      : ac
+                                          ? Color.fromARGB(125, 49, 135, 206)
+                                          : Colors.white,
                                   size: 30,
                                 ))),
                       ],
@@ -708,7 +718,7 @@ class _roomsState extends State<rooms> {
             )),
         Positioned(
             bottom: 30,
-            left: 20,
+            left: 15,
             child: Column(
               children: [
                 Row(
@@ -727,7 +737,13 @@ class _roomsState extends State<rooms> {
                                   icon: Icon(
                                     Icons.lightbulb_rounded,
                                     size: led ? 30 : 20,
-                                    color: led ? Colors.yellow : Colors.white,
+                                    color: widget.dark_theme
+                                        ? led
+                                            ? Colors.yellow
+                                            : Colors.white
+                                        : led
+                                            ? Colors.blue
+                                            : Colors.black,
                                   )),
                               SizedBox(width: 20),
                               IconButton(
@@ -744,7 +760,13 @@ class _roomsState extends State<rooms> {
                                     led
                                         ? Icons.toggle_on_outlined
                                         : Icons.toggle_off_outlined,
-                                    color: led ? Colors.yellow : Colors.white,
+                                    color: widget.dark_theme
+                                        ? led
+                                            ? Colors.yellow
+                                            : Colors.white
+                                        : led
+                                            ? Colors.blue
+                                            : Colors.black,
                                     size: 30,
                                   ))
                             ],
@@ -758,7 +780,9 @@ class _roomsState extends State<rooms> {
                               Text(
                                 "Light Bulbs",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: widget.dark_theme
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ]),
@@ -799,12 +823,8 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade200,
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade400,
+                                widget.dark_theme ? Colors.black : Colors.white,
+                                widget.dark_theme ? Colors.black : Colors.white,
                                 //Colors.blueGrey.shade200,
                                 //Colors.blueGrey.shade400,
                               ])),
@@ -822,7 +842,13 @@ class _roomsState extends State<rooms> {
                                         ? Icons.mode_fan_off_sharp
                                         : Icons.mode_fan_off_outlined,
                                     size: fan ? 30 : 25,
-                                    color: fan ? Colors.yellow : Colors.white,
+                                    color: widget.dark_theme
+                                        ? fan
+                                            ? Colors.yellow
+                                            : Colors.white
+                                        : fan
+                                            ? Colors.blue
+                                            : Colors.black,
                                   )),
                               SizedBox(width: 50),
                               IconButton(
@@ -836,7 +862,13 @@ class _roomsState extends State<rooms> {
                                     fan
                                         ? Icons.toggle_on_outlined
                                         : Icons.toggle_off_outlined,
-                                    color: fan ? Colors.yellow : Colors.white,
+                                    color: widget.dark_theme
+                                        ? fan
+                                            ? Colors.yellow
+                                            : Colors.white
+                                        : fan
+                                            ? Colors.blue
+                                            : Colors.black,
                                     size: 30,
                                   )),
                             ],
@@ -859,7 +891,9 @@ class _roomsState extends State<rooms> {
                             child: Text(
                               "Fans",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: widget.dark_theme
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
                             ),
                           )
@@ -899,12 +933,8 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade200,
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade400,
+                                widget.dark_theme ? Colors.black : Colors.white,
+                                widget.dark_theme ? Colors.black : Colors.white,
                               ])),
                     ),
                   ],
@@ -928,7 +958,9 @@ class _roomsState extends State<rooms> {
                                       icon: Icon(
                                         Icons.electrical_services_sharp,
                                         size: 35,
-                                        color: Colors.white,
+                                        color: widget.dark_theme
+                                            ? Colors.white
+                                            : Colors.black,
                                       )),
                                   SizedBox(width: 20),
                                   IconButton(
@@ -942,7 +974,9 @@ class _roomsState extends State<rooms> {
                                       icon: Icon(
                                         Icons.toggle_off_outlined,
                                         size: 25,
-                                        color: Colors.white,
+                                        color: widget.dark_theme
+                                            ? Colors.white
+                                            : Colors.black,
                                       )),
                                 ],
                               )),
@@ -953,7 +987,9 @@ class _roomsState extends State<rooms> {
                             child: Text(
                               "Sockets",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: widget.dark_theme
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
                             ),
                           )
@@ -991,12 +1027,8 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade200,
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade400,
+                                widget.dark_theme ? Colors.black : Colors.white,
+                                widget.dark_theme ? Colors.black : Colors.white,
                               ])),
                     ),
                     SizedBox(width: 30),
@@ -1005,7 +1037,7 @@ class _roomsState extends State<rooms> {
                         children: [
                           Padding(
                               padding: EdgeInsets.only(
-                                top: 8,
+                                top: 10,
                                 right: 15,
                               ),
                               child: Row(
@@ -1016,7 +1048,9 @@ class _roomsState extends State<rooms> {
                                       icon: Icon(
                                         Icons.window_outlined,
                                         size: 35,
-                                        color: Colors.white,
+                                        color: widget.dark_theme
+                                            ? Colors.white
+                                            : Colors.black,
                                       )),
                                   SizedBox(width: 15),
                                   IconButton(
@@ -1024,7 +1058,9 @@ class _roomsState extends State<rooms> {
                                       icon: Icon(
                                         Icons.toggle_off_outlined,
                                         size: 25,
-                                        color: Colors.white,
+                                        color: widget.dark_theme
+                                            ? Colors.white
+                                            : Colors.black,
                                       )),
                                 ],
                               )),
@@ -1041,7 +1077,9 @@ class _roomsState extends State<rooms> {
                               Text(
                                 "Shutter",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: widget.dark_theme
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ]),
@@ -1082,12 +1120,8 @@ class _roomsState extends State<rooms> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade200,
-                                widget.dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade400,
+                                widget.dark_theme ? Colors.black : Colors.white,
+                                widget.dark_theme ? Colors.black : Colors.white,
                                 //Colors.blueGrey.shade200,
                                 //Colors.blueGrey.shade400,
                               ])),

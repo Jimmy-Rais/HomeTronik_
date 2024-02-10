@@ -107,7 +107,9 @@ class _MyHomePage2State extends State<MyHomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: dark_theme ? Colors.black : Colors.blueGrey[300],
+      backgroundColor: dark_theme
+          ? Colors.black
+          : Color.fromARGB(255, 255, 255, 255), //Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
           top: 50,
@@ -127,7 +129,9 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 icon: Icon(
                   Icons.menu_outlined,
                   size: 45,
-                  color: const Color.fromARGB(183, 255, 255, 255),
+                  color: dark_theme
+                      ? Color.fromARGB(183, 255, 255, 255)
+                      : Colors.black,
                 ))),
         Positioned(
             top: 30,
@@ -139,7 +143,9 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 icon: Icon(
                   dark_theme ? Icons.toggle_off : Icons.toggle_on,
                   size: 45,
-                  color: const Color.fromARGB(183, 255, 255, 255),
+                  color: dark_theme
+                      ? Color.fromARGB(183, 255, 255, 255)
+                      : Colors.black,
                 ))),
         Positioned(
           top: 50,
@@ -215,7 +221,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 Text(
                   "Hi Jimmy!",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: dark_theme ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 12,
                   ),
@@ -229,7 +235,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
               Text(
                 "Welcome to HomeTronik!",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: dark_theme ? Colors.white : Colors.black,
                   fontSize: 10,
                 ),
               ),
@@ -238,7 +244,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
           top: 190,
           left: 3,
           child: Padding(
-            padding: const EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 5),
             child: SingleChildScrollView(
               child: Row(
                 children: [
@@ -250,14 +256,14 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             icon: Icon(
                               Icons.wifi,
                               size: 20,
-                              color: Colors.white,
+                              color: dark_theme ? Colors.white : Colors.black,
                             )),
                         Padding(
                           padding: EdgeInsets.only(top: 0),
                           child: Text(
                             "Internet",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: dark_theme ? Colors.white : Colors.black,
                               fontSize: 10,
                             ),
                           ),
@@ -300,10 +306,11 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             colors: [
                               dark_theme
                                   ? Colors.black
-                                  : Colors.blueGrey.shade200,
+                                  : Colors.white, //Colors.blueGrey.shade200,
                               dark_theme
                                   ? Colors.black
-                                  : Colors.blueGrey.shade400,
+                                  : Color.fromARGB(255, 255, 255,
+                                      255), //Colors.blueGrey.shade400,
                             ])),
                     height: 65,
                     width: 65,
@@ -321,14 +328,15 @@ class _MyHomePage2State extends State<MyHomePage2> {
                                 icon: Icon(
                                   FontAwesomeIcons.shower,
                                   size: 20,
-                                  color: Colors.white,
+                                  color:
+                                      dark_theme ? Colors.white : Colors.black,
                                 ))),
                         Padding(
                           padding: EdgeInsets.only(top: 0),
                           child: Text(
                             "Water",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: dark_theme ? Colors.white : Colors.black,
                               fontSize: 10,
                             ),
                           ),
@@ -369,12 +377,8 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade200,
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade400,
+                              dark_theme ? Colors.black : Colors.white,
+                              dark_theme ? Colors.black : Colors.white,
                             ])),
                     height: 65,
                     width: 65,
@@ -392,14 +396,15 @@ class _MyHomePage2State extends State<MyHomePage2> {
                                 icon: Icon(
                                   Icons.gas_meter,
                                   size: 28,
-                                  color: Colors.white,
+                                  color:
+                                      dark_theme ? Colors.white : Colors.black,
                                 ))),
                         Padding(
                           padding: EdgeInsets.only(top: 0),
                           child: Text(
                             "Smart meter",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: dark_theme ? Colors.white : Colors.black,
                               fontSize: 10,
                             ),
                           ),
@@ -440,12 +445,8 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade200,
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade400,
+                              dark_theme ? Colors.black : Colors.white,
+                              dark_theme ? Colors.black : Colors.white,
                             ])),
                     height: 65,
                     width: 65,
@@ -463,14 +464,15 @@ class _MyHomePage2State extends State<MyHomePage2> {
                                 icon: Icon(
                                   FontAwesomeIcons.trash,
                                   size: 20,
-                                  color: Colors.white,
+                                  color:
+                                      dark_theme ? Colors.white : Colors.black,
                                 ))),
                         Padding(
                           padding: EdgeInsets.only(top: 0),
                           child: Text(
                             "Trash",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: dark_theme ? Colors.white : Colors.black,
                               fontSize: 10,
                             ),
                           ),
@@ -511,12 +513,8 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade200,
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade400,
+                              dark_theme ? Colors.black : Colors.white,
+                              dark_theme ? Colors.black : Colors.white,
                             ])),
                     height: 65,
                     width: 65,
@@ -546,6 +544,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -554,33 +553,28 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: dark_theme ? Colors.white : Colors.grey,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(3,
-                                  3), // Offset of the shadow (horizontal, vertical)
-                              // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                                color: Colors.blueGrey.shade200,
-                                // Color of the shadow
-                                spreadRadius: 1, // Spread radius of the shadow
-                                blurRadius: 3, // Blur radius of the shadow
-                                offset: Offset(-4,
-                                    -4) // Offset of the shadow (horizontal, vertical)
-                                ),
+                              color: dark_theme ? Colors.black : Colors.white,
+                              // Color of the shadow
+                              spreadRadius: 1, // Spread radius of the shadow
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
+                            ),
                           ],
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade200,
-                                dark_theme
-                                    ? Colors.black
-                                    : Colors.blueGrey.shade400,
+                                Colors.grey.shade200,
+                                Colors.grey.shade400,
                               ])),
                       child: Container(
                         decoration: BoxDecoration(
@@ -609,7 +603,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -618,7 +612,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.shade700,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
                               blurRadius: 3, // Blur radius of the shadow
@@ -626,7 +620,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                                   1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                              color: Colors.grey.shade200,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
                               blurRadius: 8, // Blur radius of the shadow
@@ -668,12 +662,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          /*image: DecorationImage(
-                          image: AssetImage("images/kitchen.jpg"),
-                          fit: BoxFit.cover,
-                        ),*/
-                          //borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey[300],
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -682,20 +671,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.shade700,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(3,
-                                  3), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                              color: Colors.grey.shade200,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(-4,
-                                  -4), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
                             ),
                           ],
                           gradient: LinearGradient(
@@ -732,12 +721,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          /*image: DecorationImage(
-                          image: AssetImage("images/kitchen.jpg"),
-                          fit: BoxFit.cover,
-                        ),*/
-                          //borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey[300],
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -746,20 +730,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.shade700,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(3,
-                                  3), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                              color: Colors.grey.shade200,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(-4,
-                                  -4), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
                             ),
                           ],
                           gradient: LinearGradient(
@@ -796,12 +780,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          /*image: DecorationImage(
-                          image: AssetImage("images/kitchen.jpg"),
-                          fit: BoxFit.cover,
-                        ),*/
-                          //borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey[300],
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -810,20 +789,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.shade700,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(3,
-                                  3), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                              color: Colors.grey.shade200,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(-4,
-                                  -4), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
                             ),
                           ],
                           gradient: LinearGradient(
@@ -860,12 +839,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       width: 150,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          /*image: DecorationImage(
-                          image: AssetImage("images/kitchen.jpg"),
-                          fit: BoxFit.cover,
-                        ),*/
-                          //borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey[300],
+                          color: dark_theme ? Colors.white : Colors.black,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
@@ -874,20 +848,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.shade700,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(3,
-                                  3), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 3, // Blur radius of the shadow
+                              offset: Offset(1,
+                                  1), // Offset of the shadow (horizontal, vertical)
                             ),
                             BoxShadow(
-                              color: Colors.grey.shade200,
+                              color: dark_theme ? Colors.black : Colors.white,
                               // Color of the shadow
                               spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 10, // Blur radius of the shadow
-                              offset: Offset(-4,
-                                  -4), // Offset of the shadow (horizontal, vertical)
+                              blurRadius: 8, // Blur radius of the shadow
+                              offset: Offset(-1,
+                                  -1), // Offset of the shadow (horizontal, vertical)
                             ),
                           ],
                           gradient: LinearGradient(
@@ -927,7 +901,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   child: Icon(
                     Icons.cloud,
                     size: 18,
-                    color: Colors.white,
+                    color: dark_theme ? Colors.white : Colors.black,
                   ),
                 ),
                 Padding(
@@ -940,7 +914,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       Text(
                         'Temp:',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 218, 211, 211),
+                          color: dark_theme ? Colors.white : Colors.black,
                           fontSize: 10,
                         ),
                       ),
@@ -985,7 +959,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                       Text(
                         "Hum:",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 218, 211, 211),
+                            color: dark_theme ? Colors.white : Colors.black,
                             fontSize: 10),
                       ),
                       DefaultTextStyle(
@@ -1040,7 +1014,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                         3, 3), // Offset of the shadow (horizontal, vertical)
                   ),
                   BoxShadow(
-                    color: Colors.blueGrey.shade200,
+                    color: Colors.white,
                     // Color of the shadow
                     spreadRadius: 1, // Spread radius of the shadow
                     blurRadius: 10, // Blur radius of the shadow
@@ -1052,8 +1026,8 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      dark_theme ? Colors.black : Colors.blueGrey.shade200,
-                      dark_theme ? Colors.black : Colors.blueGrey.shade400,
+                      dark_theme ? Colors.black : Colors.white,
+                      dark_theme ? Colors.black : Colors.white,
                     ])),
             height: 60,
             width: 85,
