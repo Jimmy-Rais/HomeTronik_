@@ -390,14 +390,14 @@ class _MyHomePage2State extends State<MyHomePage2> {
                             child: IconButton(
                                 onPressed: () {},
                                 icon: Icon(
-                                  Icons.power,
+                                  Icons.gas_meter,
                                   size: 28,
                                   color: Colors.white,
                                 ))),
                         Padding(
                           padding: EdgeInsets.only(top: 0),
                           child: Text(
-                            "Electricity",
+                            "Smart meter",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 10,

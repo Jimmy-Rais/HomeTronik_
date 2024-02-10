@@ -7,8 +7,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'speechTotext.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'appliances.dart';
+import 'package:knob_widget/knob_widget.dart';
 
+//Images
+const kitchen = "images/kitchen.jpg";
+const guest = "images/guest.jpg";
+const living = "images/living.jpg";
+const hall = "images/hall.jpg";
+const out = "images/out.jpg";
+const fence = "images/fence.jpg";
+bool isKitchen = false;
+bool isGuest = false;
+bool isFence = false;
+bool isHall = false;
+bool isLiving = false;
 /*
 Global variables declaration: Database path reference for appliances
 */
@@ -22,40 +34,96 @@ DatabaseReference TempStatusRef =
     FirebaseDatabase.instance.reference().child('Temperature');
 DatabaseReference HumRef =
     FirebaseDatabase.instance.reference().child('Humidity');
-double TempStatus = 0.0;
-int HumStatus = 0;
 
 //Rooms widget: Takes as parameter the main theme and the image of the room
+//assign to the boolean variable _isRoomname true if the image of the room is displayed
 class rooms extends StatefulWidget {
   rooms(this.dark_theme, this.img, {super.key});
   bool dark_theme; //main theme,dark or light
   var img; //Room image
+
   @override
   State<rooms> createState() => _roomsState();
 }
 
 class _roomsState extends State<rooms> {
   /*Initialization of appliances states variables*/
-
+  double TempStatus = 0.0;
+  int HumStatus = 0;
   //Flutter text to speech object creation
   final FlutterTts flutterTts = FlutterTts();
   stt.SpeechToText? _speech;
   String _text = "";
   bool _isListening = false;
   //Initialize boolean variables associated to appliances states
+  _loadLEDStatus() async {
+    DatabaseEvent event = await ledStatusRef.once();
+    bool? parsedValue = bool.tryParse(event.snapshot.value.toString());
+    if (event.snapshot.value != null) {
+      setState(() {
+        bool led = parsedValue!;
+      });
+    }
+  }
+
   bool led = false;
   bool fan = false;
   bool ac = false;
   bool socket = false;
   bool shutter = false;
+  KnobController _controller = KnobController(
+    initial: 2,
+    minimum: 1,
+    maximum: 5,
+    startAngle: 0,
+    endAngle: 180,
+  );
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
     _listen();
-    _led();
-    _ac();
-    _fan();
+    _led(); //Toggle the led state
+    _ac(); //Toggle the ac state
+    _fan(); //Toggle the fan state
+    _roomname();
+    _loadTempStatus(); //Retrieve the actual room state
+  }
+
+  void _roomname() {
+    if (widget.img == kitchen) {
+      setState(() {
+        isKitchen = true;
+        isGuest = false;
+        isFence = false;
+        isHall = false;
+        isLiving = false;
+      });
+    } else if (widget.img == hall) {
+      setState(() {
+        isHall = true;
+        isGuest = false;
+        isFence = false;
+        isLiving = false;
+        isKitchen = false;
+      });
+    } else if (widget.img == living) {
+      setState(() {
+        isLiving = true;
+        isHall = false;
+        isGuest = false;
+        isFence = false;
+        isKitchen = false;
+      });
+    } else if (widget.img == fence) {
+      setState(() {
+        isFence = true;
+        isHall = false;
+        isGuest = false;
+        isLiving = false;
+        isKitchen = false;
+      });
+    }
   }
 
   void _listen() async {
@@ -69,21 +137,52 @@ class _roomsState extends State<rooms> {
         _speech!.listen(
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
-
+            // appliances controlled by voice commands
             if (_text == "Jimmy") {
               flutterTts.speak(
-                  'Welcome to HomeTronik,a new SmartHome experience.To switch on a device(For example Light,Fan,AC,Socket,Smart tv) say SWITCH ON Device name or click on the corresponding button...To switch it off ,say SWITCH OFF Device name or click on the corresponding Button.For example: Switch on Light.Switch off Light. To know the temperature of the room,say TEMPERATURE...Let me know if you need to know something else');
-            } else if (_text == "Switch on light") {
-              flutterTts.speak(
-                  'Welcome to HomeTronik,a  SmartHome experience.To switch on a device(For example Light,Fan,AC,Socket,Smart tv) say SWITCH ON Device name...To switch it off ,say SWITCH OFF Device name.For example: Switch on Light.Switch off Light. To know the temperature of the room,say TEMPERATURE...Let me know if you need to know something else');
+                  'Yes....Welcome to HomeTronik,a new SmartHome experience.How can I assist you');
+            } else if (_text == "switch on light") {
+              flutterTts.speak("Light switched on");
+              _led();
+            } else if (_text == "switch off light") {
+              flutterTts.speak("Light switched off ");
+              _led();
+            } else if (_text == "switch on fan") {
+              flutterTts.speak("Fan switched on ");
+              _fan();
+            } else if (_text == "switch off fan") {
+              flutterTts.speak("Fan switched switched off ");
+              _fan();
+            } else if (_text == "switch on AC") {
+              flutterTts.speak("AC switched on ");
+              _ac();
+            } else if (_text == "switch off AC") {
+              flutterTts.speak("AC switched off ");
+              _ac();
+            } else if (_text == "temperature") {
+              _loadTempStatus();
+              flutterTts
+                  .speak("The room temperature is$TempStatus Degrees Celsius");
             }
             _isListening = true;
+            //_listen();
           }),
         );
       }
     } else {
       setState(() => _isListening = false);
       _speech!.stop();
+    }
+  }
+
+//Function to retrieve Temperature and Humidity of the room
+  _loadTempStatus() async {
+    DatabaseEvent event = await TempStatusRef.once();
+    if (event.snapshot.value != null) {
+      double? parsedValue = double.tryParse(event.snapshot.value.toString());
+      setState(() {
+        TempStatus = parsedValue!;
+      });
     }
   }
 
@@ -216,97 +315,249 @@ class _roomsState extends State<rooms> {
               padding: EdgeInsets.only(left: 10),
               child: Row(
                 children: [
-                  Container(
-                    height: 30,
-                    width: 90,
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[300],
-                        boxShadow: [
-                          BoxShadow(
-                            color: widget.dark_theme
-                                ? Colors.blueGrey.shade700
-                                : Colors.grey,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(3,
-                                3), // Offset of the shadow (horizontal, vertical)
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        widget.img = living;
+                        _roomname();
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 90,
+                      decoration: isLiving
+                          ? BoxDecoration(
+                              color: Colors.blueGrey[300],
+                              boxShadow: [
+                                BoxShadow(
+                                  color: widget.dark_theme
+                                      ? Colors.blueGrey.shade700
+                                      : Colors.grey,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(3,
+                                      3), // Offset of the shadow (horizontal, vertical)
+                                ),
+                                BoxShadow(
+                                  color: Colors.blueGrey.shade200,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(-4,
+                                      -4), // Offset of the shadow (horizontal, vertical)
+                                ),
+                              ],
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade200,
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade400,
+                                  ]))
+                          : BoxDecoration(
+                              color: Colors.grey.withOpacity(0.9),
+                            ),
+                      child: Center(
+                        child: Text(
+                          "Living room",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
                           ),
-                          BoxShadow(
-                            color: Colors.blueGrey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(-4,
-                                -4), // Offset of the shadow (horizontal, vertical)
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        widget.img = kitchen;
+                        _roomname();
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 90,
+                      decoration: isKitchen
+                          ? BoxDecoration(
+                              color: Colors.blueGrey[300],
+                              boxShadow: [
+                                BoxShadow(
+                                  color: widget.dark_theme
+                                      ? Colors.blueGrey.shade700
+                                      : Colors.grey,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(3,
+                                      3), // Offset of the shadow (horizontal, vertical)
+                                ),
+                                BoxShadow(
+                                  color: Colors.blueGrey.shade200,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(-4,
+                                      -4), // Offset of the shadow (horizontal, vertical)
+                                ),
+                              ],
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade200,
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade400,
+                                  ]))
+                          : BoxDecoration(
+                              color: Colors.grey.withOpacity(0.9),
+                            ),
+                      child: Center(
+                        child: Text(
+                          "Kitchen",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
                           ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              widget.dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade200,
-                              widget.dark_theme
-                                  ? Colors.black
-                                  : Colors.blueGrey.shade400,
-                            ])),
-                    child: Center(
-                      child: Text(
-                        "Living room",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(width: 15),
-                  Container(
-                    height: 30,
-                    width: 90,
-                    color: Colors.grey.withOpacity(0.9),
-                    child: Center(
-                      child: Text(
-                        "Kitchen",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        widget.img = fence;
+                        _roomname();
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 90,
+                      decoration: isFence
+                          ? BoxDecoration(
+                              color: Colors.blueGrey[300],
+                              boxShadow: [
+                                BoxShadow(
+                                  color: widget.dark_theme
+                                      ? Colors.blueGrey.shade700
+                                      : Colors.grey,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(3,
+                                      3), // Offset of the shadow (horizontal, vertical)
+                                ),
+                                BoxShadow(
+                                  color: Colors.blueGrey.shade200,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(-4,
+                                      -4), // Offset of the shadow (horizontal, vertical)
+                                ),
+                              ],
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade200,
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade400,
+                                  ]))
+                          : BoxDecoration(
+                              color: Colors.grey.withOpacity(0.9),
+                            ),
+                      child: Center(
+                        child: Text(
+                          "fence",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(width: 15),
-                  Container(
-                    height: 30,
-                    width: 90,
-                    color: Colors.grey.withOpacity(0.9),
-                    child: Center(
-                      child: Text(
-                        "fence",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  Container(
-                    height: 30,
-                    width: 90,
-                    color: Colors.grey.withOpacity(0.9),
-                    child: Center(
-                      child: Text(
-                        "hall",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        widget.img = out;
+                        _roomname();
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 90,
+                      decoration: isHall
+                          ? BoxDecoration(
+                              color: Colors.blueGrey[300],
+                              boxShadow: [
+                                BoxShadow(
+                                  color: widget.dark_theme
+                                      ? Colors.blueGrey.shade700
+                                      : Colors.grey,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(3,
+                                      3), // Offset of the shadow (horizontal, vertical)
+                                ),
+                                BoxShadow(
+                                  color: Colors.blueGrey.shade200,
+                                  // Color of the shadow
+                                  spreadRadius:
+                                      1, // Spread radius of the shadow
+                                  blurRadius: 10, // Blur radius of the shadow
+                                  offset: Offset(-4,
+                                      -4), // Offset of the shadow (horizontal, vertical)
+                                ),
+                              ],
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade200,
+                                    widget.dark_theme
+                                        ? Colors.black
+                                        : Colors.blueGrey.shade400,
+                                  ]))
+                          : BoxDecoration(
+                              color: Colors.grey.withOpacity(0.9),
+                            ),
+                      child: Center(
+                        child: Text(
+                          "hall",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
@@ -400,7 +651,7 @@ class _roomsState extends State<rooms> {
                                   repeatForever: true,
                                   animatedTexts: [
                                     TypewriterAnimatedText(
-                                      '22°C',
+                                      '$TempStatus',
                                       speed: const Duration(milliseconds: 900),
                                     ),
                                   ],
@@ -432,17 +683,16 @@ class _roomsState extends State<rooms> {
                             ),
                             child: IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Speechtotext()));
+                                  !ac
+                                      ? flutterTts.speak('on')
+                                      : flutterTts.speak('off');
+                                  _ac();
                                 },
                                 icon: Icon(
                                   ac
                                       ? Icons.toggle_on_outlined
                                       : Icons.toggle_off_outlined,
-                                  color: ac ? Colors.blue : Colors.white,
+                                  color: ac ? Colors.yellow : Colors.white,
                                   size: 30,
                                 ))),
                       ],
@@ -473,7 +723,6 @@ class _roomsState extends State<rooms> {
                                   onPressed: () {
                                     //Send the toogle command to the appliance widget
                                     //appliances(led);
-                                    ();
                                   },
                                   icon: Icon(
                                     Icons.lightbulb_rounded,
@@ -483,7 +732,9 @@ class _roomsState extends State<rooms> {
                               SizedBox(width: 20),
                               IconButton(
                                   onPressed: () {
-                                    flutterTts.speak('Light switched  on');
+                                    !led
+                                        ? flutterTts.speak('on')
+                                        : flutterTts.speak('off');
                                     setState(() {
                                       _led();
                                       //_loadLEDStatus();
@@ -567,27 +818,43 @@ class _roomsState extends State<rooms> {
                               IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    Icons.mode_fan_off_outlined,
-                                    size: 30,
-                                    color: Colors.white,
+                                    fan
+                                        ? Icons.mode_fan_off_sharp
+                                        : Icons.mode_fan_off_outlined,
+                                    size: fan ? 30 : 25,
+                                    color: fan ? Colors.yellow : Colors.white,
                                   )),
-                              SizedBox(width: 40),
+                              SizedBox(width: 50),
                               IconButton(
                                   onPressed: () {
                                     _fan();
+                                    fan
+                                        ? flutterTts.speak('on')
+                                        : flutterTts.speak('off');
                                   },
                                   icon: Icon(
                                     fan
                                         ? Icons.toggle_on_outlined
                                         : Icons.toggle_off_outlined,
-                                    color: fan ? Colors.blue : Colors.white,
-                                    size: 25,
-                                  ))
+                                    color: fan ? Colors.yellow : Colors.white,
+                                    size: 30,
+                                  )),
                             ],
+                          ),
+                          Knob(
+                            controller: _controller,
+                            height: 50,
+                            width: 80,
+                            style: KnobStyle(
+                              labelStyle: TextStyle(fontSize: 10),
+                              tickOffset: -5,
+                              labelOffset: -15,
+                              minorTicksPerInterval: 6,
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 60,
+                              top: 20,
                             ),
                             child: Text(
                               "Fans",
@@ -665,7 +932,13 @@ class _roomsState extends State<rooms> {
                                       )),
                                   SizedBox(width: 20),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Speechtotext()));
+                                      },
                                       icon: Icon(
                                         Icons.toggle_off_outlined,
                                         size: 25,
