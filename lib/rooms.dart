@@ -623,7 +623,9 @@ class _roomsState extends State<rooms> {
                             child: Text(
                               "Living Room",
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.7),
+                                color: widget.dark_theme
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12,
                                 fontFamily: 'Abel',
@@ -635,13 +637,17 @@ class _roomsState extends State<rooms> {
                             children: [
                               Icon(
                                 Icons.device_thermostat_outlined,
-                                color: Colors.white,
+                                color: widget.dark_theme
+                                    ? Colors.white
+                                    : Colors.black,
                                 size: 20,
                               ),
                               Text(
                                 ':',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: widget.dark_theme
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                               DefaultTextStyle(
@@ -675,7 +681,8 @@ class _roomsState extends State<rooms> {
                         Text(
                           "AC",
                           style: TextStyle(
-                            color: Colors.white,
+                            color:
+                                widget.dark_theme ? Colors.white : Colors.black,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                           ),
@@ -702,7 +709,7 @@ class _roomsState extends State<rooms> {
                                           : Colors.white
                                       : ac
                                           ? Color.fromARGB(125, 49, 135, 206)
-                                          : Colors.white,
+                                          : Colors.black,
                                   size: 30,
                                 ))),
                       ],
@@ -710,7 +717,9 @@ class _roomsState extends State<rooms> {
                   ],
                 ),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(170, 135, 134, 134).withOpacity(0.9),
+                    color: widget.dark_theme
+                        ? Color.fromARGB(170, 135, 134, 134).withOpacity(0.9)
+                        : Colors.white,
                     borderRadius: BorderRadius.all(
                       Radius.circular(90),
                     )),
