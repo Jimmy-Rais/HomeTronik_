@@ -2,10 +2,21 @@
 
 *****Screens demo***** 
 
-    **1.HomeScreen**:
-![Capture d’écran (75)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/70805f75-7078-456d-bddf-697ed5162903)
-    **2.Rooms**:
-![Capture d’écran (39)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/88680625-2b22-45ce-9efc-7edfb4329ca9)
+    **1.HomeScreen Dark Mode**:
+
+![Capture d’écran (76)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/1a4faa67-dda8-40fe-a916-e183b2ee5fb9)
+
+    **2.HomeScreen Light mode**:
+
+![Capture d’écran (77)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/ef86ff34-1315-4c0c-b0d3-2a0071a42c2f)
+
+    **3.RoomScreen Dark Mode mode**:
+![Capture d’écran (78)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/ff90a738-880c-473e-b555-10e508c7cdc0)
+        
+    **4.RoomScreen Dark Light mode**:
+     
+![Capture d’écran (79)](https://github.com/Jimmy-Rais/HomeTronik_/assets/81222691/be414d3f-f44d-470d-842c-ffeeb2c08f84)
+
 
 ****Features****:
 
