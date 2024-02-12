@@ -25,7 +25,7 @@ Real-time Sensor Data: Stay informed about your home environment with live tempe
 
 **Voice assistant**:Switch on and off devices using voice and get sensor data using voice commands
 
-**Energy and electricity bills management system **: Control and optimize your monthly energy usage,electricity bills monitoring and optimization solution
+**Energy and electricity bills management system**: Control and optimize your monthly energy usage,electricity bills monitoring and optimization solution
 
 **Enhanced Security**: Keep an eye on things with integrated camera support. Receive alerts and view live feeds for peace of mind.
 ESP32 Compatibility: Build your smart home on a secure and affordable platform with seamless ESP32 integration.
