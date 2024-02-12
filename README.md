@@ -1,4 +1,4 @@
-*****Smart House app with Energy optimization + Electricity bills monitoring and Optimization***** ,*****HomeTronik***** is an open-source Flutter app that lets you control your smart home from your smartphone. It is currently under development, but it has the potential to be a powerful and versatile smart home solution.
+*****Smart House app with Energy optimization + Electricity bills monitoring system***** ,*****HomeTronik***** is an open-source Flutter app that lets you control your smart home from your smartphone. It is currently under development, but it has the potential to be a powerful and versatile smart home solution.
 
 *****Screens demo***** 
 
