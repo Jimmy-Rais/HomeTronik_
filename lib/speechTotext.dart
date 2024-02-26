@@ -1,6 +1,8 @@
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
+/*import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
 
 class Speechtotext extends StatefulWidget {
   const Speechtotext({super.key});
@@ -32,7 +34,22 @@ class _SpeechtotextState extends State<Speechtotext> {
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
-          child: Text('$_text'),
+          child: /*Positioned(
+            bottom: 10,
+            child: Container(
+              child: SfCartesianChart(
+                title: ChartTitle(text: "Power Consumption"),
+                series: [
+                  LineSeries<bills, String>(
+                    dataSource: chartData,
+                    xValueMapper: (bills power, _) => power.time,
+                    yValueMapper: (bills power, _) => power.power,
+                  )
+                ],
+              ),
+            ),
+          ),*/
+              Text('$_text'),
         ),
       ),
     );

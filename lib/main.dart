@@ -9,6 +9,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+/*import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +52,13 @@ class _MyHomePage2State extends State<MyHomePage2> {
   double TempStatus = 0.0;
   int HumStatus = 0;
   @override
+  /*final List<bills> chartData = [
+    bills(200, "1 am"),
+    bills(250, "3 am"),
+    bills(300, "4 am"),
+    bills(350, "6 am")
+  ];*/
+
   void initState() {
     super.initState();
     _loadLEDStatus();
@@ -1037,3 +1046,11 @@ class _MyHomePage2State extends State<MyHomePage2> {
     );
   }
 }
+
+/*class bills {
+  double power = 0.0;
+  String time = "1";
+
+  bills(this.power, this.time);
+}
+*/
