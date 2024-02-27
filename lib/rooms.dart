@@ -163,6 +163,33 @@ class _roomsState extends State<rooms> {
               _loadTempStatus();
               flutterTts
                   .speak("The room temperature is$TempStatus Degrees Celsius");
+            } else if (_text == "living room") {
+              flutterTts.speak("Welcome to the Living room screen");
+              setState(() {
+                widget.img = living;
+                _roomname();
+              });
+            } else if (_text == "fence") {
+              flutterTts.speak("Welcome to the fence screen");
+              setState(() {
+                widget.img = fence;
+                _roomname();
+              });
+            } else if (_text == "balcony") {
+              flutterTts.speak("Welcome to the balcony screen");
+              setState(() {
+                widget.img = out;
+                _roomname();
+              });
+            } else if (_text == "kitchen") {
+              flutterTts.speak("Welcome to the kitchen screen");
+              setState(() {
+                widget.img = kitchen;
+                _roomname();
+              });
+            } else if (_text == "main screen") {
+              flutterTts.speak("Welcome to the main screen");
+              Navigator.pop(context);
             }
             _isListening = true;
             //_listen();
