@@ -9,6 +9,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 /*import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
 
@@ -1042,11 +1044,41 @@ class _MyHomePage2State extends State<MyHomePage2> {
             width: 85,
           ),
         ),
+        Positioned(
+          bottom: 5,
+          left: 1,
+          width: 500,
+          height: 180,
+          child: SfCartesianChart(
+            // Define your chart properties here
+            primaryXAxis: CategoryAxis(),
+            series: <CartesianSeries>[
+              LineSeries<SalesData, String>(
+                dataSource: <SalesData>[
+                  SalesData('Jan', 35),
+                  SalesData('Feb', 28),
+                  SalesData('Mar', 34),
+                  SalesData('Apr', 32),
+                  // Add more data points as needed
+                ],
+                xValueMapper: (SalesData sales, _) => sales.year,
+                yValueMapper: (SalesData sales, _) => sales.sales,
+              ),
+            ],
+          ),
+        )
       ]),
     );
   }
 }
 
+// Data model class for chart
+class SalesData {
+  final String year;
+  final double sales;
+
+  SalesData(this.year, this.sales);
+}
 /*class bills {
   double power = 0.0;
   String time = "1";
