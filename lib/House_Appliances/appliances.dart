@@ -7,10 +7,10 @@ the function will toggle the database state of the appliance,
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'signin.dart';
+import '../Pages/signin.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'rooms.dart';
+import '../Pages/rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class appliances extends StatefulWidget {

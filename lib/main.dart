@@ -4,12 +4,13 @@ Created by Rais Gachaba Jimmy
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'signin.dart';
+import 'Pages/signin.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'rooms.dart';
+import 'Pages/rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'Bills/electricitybills.dart';
+import 'package:esp/ButtonStyling/buttons.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 /*import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
@@ -54,13 +55,6 @@ class _MyHomePage2State extends State<MyHomePage2> {
   double TempStatus = 0.0;
   int HumStatus = 0;
   @override
-  /*final List<bills> chartData = [
-    bills(200, "1 am"),
-    bills(250, "3 am"),
-    bills(300, "4 am"),
-    bills(350, "6 am")
-  ];*/
-
   void initState() {
     super.initState();
     _loadLEDStatus();
@@ -252,650 +246,84 @@ class _MyHomePage2State extends State<MyHomePage2> {
               ),
             ])),
         Positioned(
-          top: 190,
+          top: 185,
           left: 3,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: SingleChildScrollView(
-              child: Row(
-                children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.wifi,
-                              size: 20,
-                              color: dark_theme ? Colors.white : Colors.black,
-                            )),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            "Internet",
-                            style: TextStyle(
-                              color: dark_theme ? Colors.white : Colors.black,
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-
-                        //borderRadius: BorderRadius.circular(30),
-                        color: Colors.blueGrey[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: dark_theme
-                                ? Colors.white
-                                : Colors.blueGrey.shade700,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(3,
-                                3), // Offset of the shadow (horizontal, vertical)
-                          ),
-                          BoxShadow(
-                            color: Colors.blueGrey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(-4,
-                                -4), // Offset of the shadow (horizontal, vertical)
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              dark_theme
-                                  ? Colors.black
-                                  : Colors.white, //Colors.blueGrey.shade200,
-                              dark_theme
-                                  ? Colors.black
-                                  : Color.fromARGB(255, 255, 255,
-                                      255), //Colors.blueGrey.shade400,
-                            ])),
-                    height: 65,
-                    width: 65,
-                  ),
-                  SizedBox(width: 28),
-                  Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(
-                              top: 0,
-                            ),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  FontAwesomeIcons.shower,
-                                  size: 20,
-                                  color:
-                                      dark_theme ? Colors.white : Colors.black,
-                                ))),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            "Water",
-                            style: TextStyle(
-                              color: dark_theme ? Colors.white : Colors.black,
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-
-                        //borderRadius: BorderRadius.circular(30),
-                        color: Colors.blueGrey[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: dark_theme
-                                ? Colors.white
-                                : Colors.blueGrey.shade700,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(3,
-                                3), // Offset of the shadow (horizontal, vertical)
-                          ),
-                          BoxShadow(
-                            color: Colors.blueGrey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(-4,
-                                -4), // Offset of the shadow (horizontal, vertical)
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              dark_theme ? Colors.black : Colors.white,
-                              dark_theme ? Colors.black : Colors.white,
-                            ])),
-                    height: 65,
-                    width: 65,
-                  ),
-                  SizedBox(width: 28),
-                  Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(
-                              top: 0,
-                            ),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.gas_meter,
-                                  size: 28,
-                                  color:
-                                      dark_theme ? Colors.white : Colors.black,
-                                ))),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            "Smart meter",
-                            style: TextStyle(
-                              color: dark_theme ? Colors.white : Colors.black,
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-
-                        //borderRadius: BorderRadius.circular(30),
-                        color: Colors.blueGrey[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: dark_theme
-                                ? Colors.white
-                                : Colors.blueGrey.shade700,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(3,
-                                3), // Offset of the shadow (horizontal, vertical)
-                          ),
-                          BoxShadow(
-                            color: Colors.blueGrey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(-4,
-                                -4), // Offset of the shadow (horizontal, vertical)
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              dark_theme ? Colors.black : Colors.white,
-                              dark_theme ? Colors.black : Colors.white,
-                            ])),
-                    height: 65,
-                    width: 65,
-                  ),
-                  SizedBox(width: 28),
-                  Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(
-                              top: 0,
-                            ),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  FontAwesomeIcons.trash,
-                                  size: 20,
-                                  color:
-                                      dark_theme ? Colors.white : Colors.black,
-                                ))),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            "Trash",
-                            style: TextStyle(
-                              color: dark_theme ? Colors.white : Colors.black,
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-
-                        //borderRadius: BorderRadius.circular(30),
-                        color: Colors.blueGrey[300],
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: dark_theme
-                                ? Colors.white
-                                : Colors.blueGrey.shade700,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(3,
-                                3), // Offset of the shadow (horizontal, vertical)
-                          ),
-                          BoxShadow(
-                            color: Colors.blueGrey.shade200,
-                            // Color of the shadow
-                            spreadRadius: 1, // Spread radius of the shadow
-                            blurRadius: 10, // Blur radius of the shadow
-                            offset: Offset(-4,
-                                -4), // Offset of the shadow (horizontal, vertical)
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              dark_theme ? Colors.black : Colors.white,
-                              dark_theme ? Colors.black : Colors.white,
-                            ])),
-                    height: 65,
-                    width: 65,
-                  ),
-                ],
-              ),
+          right: 5,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              //Main Features buttons
+              children: [
+                buttonStyle2(Icons.wifi, dark_theme, "Internet", () {}),
+                SizedBox(width: 28),
+                buttonStyle2(
+                    FontAwesomeIcons.shower, dark_theme, "Water", () {}),
+                SizedBox(width: 28),
+                buttonStyle2(Icons.gas_meter, dark_theme, "Smart meter", () {}),
+                SizedBox(width: 28),
+                buttonStyle2(
+                    FontAwesomeIcons.trash, dark_theme, "Trash", () {}),
+                SizedBox(width: 28),
+                buttonStyle2(
+                    FontAwesomeIcons.trash, dark_theme, "Trash", () {}),
+              ],
             ),
           ),
         ),
         Positioned(
           top: 310,
           left: 12,
-          right: 15,
+          right: 1,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, kitchen)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/kitchen.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
+                //Kitchen decorated button
+                buttonStyle(kitchen, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, kitchen)));
+                }),
                 SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, living)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/living.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
+                //living room decorated button
+                buttonStyle(living, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, living)));
+                }),
                 SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, guest)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/guest.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
+                //Guest room decorated button
+                buttonStyle(guest, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, guest)));
+                }),
                 SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, fence)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/fence.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
+                //Fence decorated Button
+                buttonStyle(fence, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, fence)));
+                }),
                 SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, fence)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/hall.png"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
-                SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => rooms(dark_theme, out)));
-                  },
-                  child: Container(
-                      height: 250,
-                      width: 150,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 3, // Blur radius of the shadow
-                              offset: Offset(1,
-                                  1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                            BoxShadow(
-                              color: dark_theme ? Colors.black : Colors.white,
-                              // Color of the shadow
-                              spreadRadius: 1, // Spread radius of the shadow
-                              blurRadius: 8, // Blur radius of the shadow
-                              offset: Offset(-1,
-                                  -1), // Offset of the shadow (horizontal, vertical)
-                            ),
-                          ],
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.grey.shade200,
-                                Colors.grey.shade400,
-                              ])),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("images/out.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                      )),
-                ),
+                //Hall decorated Button
+                /* buttonStyle(hall, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, hall)));
+                }),*/
+                //Out decoration button
+                buttonStyle(out, dark_theme, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => rooms(dark_theme, out)));
+                }),
                 SizedBox(width: 20),
               ],
             ),
@@ -1047,42 +475,12 @@ class _MyHomePage2State extends State<MyHomePage2> {
         Positioned(
           bottom: 5,
           left: 1,
-          width: 500,
-          height: 180,
-          child: SfCartesianChart(
-            // Define your chart properties here
-            primaryXAxis: CategoryAxis(),
-            series: <CartesianSeries>[
-              LineSeries<SalesData, String>(
-                dataSource: <SalesData>[
-                  SalesData('Jan', 35),
-                  SalesData('Feb', 28),
-                  SalesData('Mar', 34),
-                  SalesData('Apr', 32),
-                  // Add more data points as needed
-                ],
-                xValueMapper: (SalesData sales, _) => sales.year,
-                yValueMapper: (SalesData sales, _) => sales.sales,
-              ),
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: bills(),
           ),
         )
       ]),
     );
   }
 }
-
-// Data model class for chart
-class SalesData {
-  final String year;
-  final double sales;
-
-  SalesData(this.year, this.sales);
-}
-/*class bills {
-  double power = 0.0;
-  String time = "1";
-
-  bills(this.power, this.time);
-}
-*/

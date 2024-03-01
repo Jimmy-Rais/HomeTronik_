@@ -5,9 +5,10 @@ import 'signin.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'speechTotext.dart';
+import '../Voice_Assistant/speechTotext.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:knob_widget/knob_widget.dart';
+import 'dart:async';
 
 //Images
 const kitchen = "images/kitchen.jpg";
@@ -47,6 +48,14 @@ class rooms extends StatefulWidget {
 }
 
 class _roomsState extends State<rooms> {
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   /*Initialization of appliances states variables*/
   double TempStatus = 0.0;
   int HumStatus = 0;
@@ -330,7 +339,12 @@ class _roomsState extends State<rooms> {
                     )),
                 SizedBox(width: 50),
                 IconButton(
-                  onPressed: _listen,
+                  onPressed: () {
+                    _timer?.cancel();
+                    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+                      _listen();
+                    });
+                  }, // _listen,
                   icon: Icon(_isListening! ? Icons.mic : Icons.mic_none),
                 ),
               ],
