@@ -1,3 +1,4 @@
+import 'package:esp/ButtonStyling/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -108,7 +109,7 @@ class _roomsState extends State<rooms> {
         isHall = false;
         isLiving = false;
       });
-    } else if (widget.img == hall) {
+    } else if (widget.img == out) {
       setState(() {
         isHall = true;
         isGuest = false;
@@ -253,51 +254,61 @@ class _roomsState extends State<rooms> {
         Positioned(
           top: 0,
           // left: 10,
-          child: Container(
-            child: Column(
-              children: [],
-            ),
-            height: 400,
-            width: 410,
-            decoration: BoxDecoration(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            switchInCurve: Curves.easeIn,
+            switchOutCurve: Curves.easeOut,
+            transitionBuilder: (child, animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInCirc,
+              height: 400,
+              width: 410,
+              decoration: BoxDecoration(
 
-                //borderRadius: BorderRadius.circular(30),
-                color: const Color.fromARGB(255, 0, 0, 0),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(45),
-                  bottomRight: Radius.circular(120),
-                ),
-                image: DecorationImage(
-                  image: AssetImage(widget.img),
-                  fit: BoxFit.cover,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blueGrey.shade700,
-                    // Color of the shadow
-                    spreadRadius: 1, // Spread radius of the shadow
-                    blurRadius: 10, // Blur radius of the shadow
-                    offset: Offset(
-                        3, 3), // Offset of the shadow (horizontal, vertical)
+                  //borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(45),
+                    bottomRight: Radius.circular(120),
                   ),
-                  BoxShadow(
-                    color: Colors.blueGrey.shade200,
-                    // Color of the shadow
-                    spreadRadius: 1, // Spread radius of the shadow
-                    blurRadius: 10, // Blur radius of the shadow
-                    offset: Offset(
-                        -4, -4), // Offset of the shadow (horizontal, vertical)
+                  image: DecorationImage(
+                    image: AssetImage(widget.img),
+                    fit: BoxFit.cover,
                   ),
-                ],
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.blueGrey.shade200,
-                      Colors.blueGrey.shade400,
-                    ])),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blueGrey.shade700,
+                      // Color of the shadow
+                      spreadRadius: 1, // Spread radius of the shadow
+                      blurRadius: 10, // Blur radius of the shadow
+                      offset: Offset(
+                          3, 3), // Offset of the shadow (horizontal, vertical)
+                    ),
+                    BoxShadow(
+                      color: Colors.blueGrey.shade200,
+                      // Color of the shadow
+                      spreadRadius: 1, // Spread radius of the shadow
+                      blurRadius: 10, // Blur radius of the shadow
+                      offset: Offset(-4,
+                          -4), // Offset of the shadow (horizontal, vertical)
+                    ),
+                  ],
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.blueGrey.shade200,
+                        Colors.blueGrey.shade400,
+                      ])),
+            ),
           ),
         ),
         Positioned(
@@ -351,294 +362,43 @@ class _roomsState extends State<rooms> {
             )),
         Positioned(
             top: 90,
+            left: 5,
+            right: 5,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.only(left: 10),
+              //   padding: EdgeInsets.only(left: 10),
               child: Row(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.img = living;
-                        _roomname();
-                      });
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 90,
-                      decoration: isLiving
-                          ? BoxDecoration(
-                              color: Colors.blueGrey[300],
-                              boxShadow: [
-                                BoxShadow(
-                                  color: widget.dark_theme
-                                      ? Colors.white
-                                      : Colors.grey,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(3,
-                                      3), // Offset of the shadow (horizontal, vertical)
-                                ),
-                                BoxShadow(
-                                  color: Colors.blueGrey.shade200,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(-4,
-                                      -4), // Offset of the shadow (horizontal, vertical)
-                                ),
-                              ],
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ]))
-                          : BoxDecoration(
-                              color: Colors.grey.withOpacity(0.9),
-                            ),
-                      child: Center(
-                        child: Text(
-                          "Living room",
-                          style: TextStyle(
-                            color:
-                                widget.dark_theme ? Colors.white : Colors.black,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  buttonStyle3(
+                      isLiving, "Living room", widget.dark_theme, living, () {
+                    setState(() {
+                      widget.img = living;
+                      _roomname();
+                    });
+                  }),
                   SizedBox(width: 15),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.img = kitchen;
-                        _roomname();
-                      });
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 90,
-                      decoration: isKitchen
-                          ? BoxDecoration(
-                              color: Colors.blueGrey[300],
-                              boxShadow: [
-                                BoxShadow(
-                                  color: widget.dark_theme
-                                      ? Colors.blueGrey.shade700
-                                      : Colors.grey,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(3,
-                                      3), // Offset of the shadow (horizontal, vertical)
-                                ),
-                                BoxShadow(
-                                  color: Colors.blueGrey.shade200,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(-4,
-                                      -4), // Offset of the shadow (horizontal, vertical)
-                                ),
-                              ],
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ]))
-                          : BoxDecoration(
-                              color: Colors.grey.withOpacity(0.9),
-                            ),
-                      child: Center(
-                        child: Text(
-                          "Kitchen",
-                          style: TextStyle(
-                            color:
-                                widget.dark_theme ? Colors.white : Colors.black,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  buttonStyle3(isKitchen, "Kitchen", widget.dark_theme, kitchen,
+                      () {
+                    setState(() {
+                      widget.img = kitchen;
+                      _roomname();
+                    });
+                  }),
                   SizedBox(width: 15),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.img = fence;
-                        _roomname();
-                      });
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 90,
-                      decoration: isFence
-                          ? BoxDecoration(
-                              color: Colors.blueGrey[300],
-                              boxShadow: [
-                                BoxShadow(
-                                  color: widget.dark_theme
-                                      ? Colors.blueGrey.shade700
-                                      : Colors.grey,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(3,
-                                      3), // Offset of the shadow (horizontal, vertical)
-                                ),
-                                BoxShadow(
-                                  color: Colors.blueGrey.shade200,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(-4,
-                                      -4), // Offset of the shadow (horizontal, vertical)
-                                ),
-                              ],
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ]))
-                          : BoxDecoration(
-                              color: Colors.grey.withOpacity(0.9),
-                            ),
-                      child: Center(
-                        child: Text(
-                          "fence",
-                          style: TextStyle(
-                            color:
-                                widget.dark_theme ? Colors.white : Colors.black,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  buttonStyle3(isFence, "Living room", widget.dark_theme, fence,
+                      () {
+                    setState(() {
+                      widget.img = fence;
+                      _roomname();
+                    });
+                  }),
                   SizedBox(width: 15),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.img = out;
-                        _roomname();
-                      });
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 90,
-                      decoration: isHall
-                          ? BoxDecoration(
-                              color: Colors.blueGrey[300],
-                              boxShadow: [
-                                BoxShadow(
-                                  color: widget.dark_theme
-                                      ? Colors.blueGrey.shade700
-                                      : Colors.grey,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(3,
-                                      3), // Offset of the shadow (horizontal, vertical)
-                                ),
-                                BoxShadow(
-                                  color: Colors.blueGrey.shade200,
-                                  // Color of the shadow
-                                  spreadRadius:
-                                      1, // Spread radius of the shadow
-                                  blurRadius: 10, // Blur radius of the shadow
-                                  offset: Offset(-4,
-                                      -4), // Offset of the shadow (horizontal, vertical)
-                                ),
-                              ],
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                    widget.dark_theme
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ]))
-                          : BoxDecoration(
-                              color: Colors.grey.withOpacity(0.9),
-                            ),
-                      child: Center(
-                        child: Text(
-                          "hall",
-                          style: TextStyle(
-                            color:
-                                widget.dark_theme ? Colors.white : Colors.black,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  Container(
-                    height: 30,
-                    width: 90,
-                    color: Colors.grey.withOpacity(0.9),
-                    child: Center(
-                      child: Text(
-                        "Kitchen",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  Container(
-                    height: 30,
-                    width: 90,
-                    color: Colors.grey.withOpacity(0.9),
-                    child: Center(
-                      child: Text(
-                        "guest",
-                        style: TextStyle(
-                          color: const Color.fromARGB(166, 255, 255, 255),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
+                  buttonStyle3(isHall, "Hall", widget.dark_theme, hall, () {
+                    setState(() {
+                      widget.img = out;
+                      _roomname();
+                    });
+                  }),
                 ],
               ),
             )),

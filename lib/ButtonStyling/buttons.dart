@@ -12,8 +12,28 @@ class buttonStyle extends StatelessWidget {
   Widget build(context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => rooms(darktheme, img)));
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                rooms(darktheme, img),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              var begin = 0.0;
+              var end = 1.0;
+              var curve = Curves.ease;
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              return ScaleTransition(
+                scale: animation.drive(tween),
+                child: child,
+              );
+            },
+          ),
+        );
+
+        /*Navigator.push(context,
+            MaterialPageRoute(builder: (context) => rooms(darktheme, img)));*/
       },
       child: Container(
           height: 250,
@@ -143,6 +163,78 @@ class buttonStyle2 extends StatelessWidget {
               ])),
       height: 75,
       width: 65,
+    );
+  }
+}
+
+class buttonStyle3 extends StatefulWidget {
+  buttonStyle3(this.isroom, this.name, this.darktheme, this.img, this._roomname,
+      {super.key});
+  final bool darktheme;
+  final bool isroom;
+  final String name;
+  final void Function() _roomname;
+  var img;
+  @override
+  State<buttonStyle3> createState() => _buttonStyle3State();
+}
+
+class _buttonStyle3State extends State<buttonStyle3> {
+  @override
+  Widget build(BuildContext context) {
+    String Name = widget.name;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          widget.img = living;
+          widget._roomname();
+        });
+      },
+      child: Container(
+        height: 30,
+        width: 90,
+        decoration: widget.isroom
+            ? BoxDecoration(
+                color: Colors.blueGrey[300],
+                boxShadow: [
+                  BoxShadow(
+                    color: widget.darktheme ? Colors.white : Colors.grey,
+                    // Color of the shadow
+                    spreadRadius: 1, // Spread radius of the shadow
+                    blurRadius: 10, // Blur radius of the shadow
+                    offset: Offset(
+                        3, 3), // Offset of the shadow (horizontal, vertical)
+                  ),
+                  BoxShadow(
+                    color: Colors.blueGrey.shade200,
+                    // Color of the shadow
+                    spreadRadius: 1, // Spread radius of the shadow
+                    blurRadius: 10, // Blur radius of the shadow
+                    offset: Offset(
+                        -4, -4), // Offset of the shadow (horizontal, vertical)
+                  ),
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      widget.darktheme ? Colors.black : Colors.white,
+                      widget.darktheme ? Colors.black : Colors.white,
+                    ]))
+            : BoxDecoration(
+                color: Colors.grey.withOpacity(0.9),
+              ),
+        child: Center(
+          child: Text(
+            "$Name",
+            style: TextStyle(
+              color: widget.darktheme ? Colors.white : Colors.black,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

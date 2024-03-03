@@ -280,6 +280,26 @@ class _MyHomePage2State extends State<MyHomePage2> {
               children: [
                 //Kitchen decorated button
                 buttonStyle(kitchen, dark_theme, () {
+                  /*Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          rooms(dark_theme, kitchen),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        var begin = 0.0;
+                        var end = 1.0;
+                        var curve = Curves.ease;
+                        var tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: curve));
+                        return ScaleTransition(
+                          scale: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );*/
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
