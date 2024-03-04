@@ -10,6 +10,7 @@ import '../Voice_Assistant/speechTotext.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:knob_widget/knob_widget.dart';
 import 'dart:async';
+import 'package:rive/rive.dart' as rive;
 
 //Images
 const kitchen = "images/kitchen.jpg";
@@ -358,6 +359,10 @@ class _roomsState extends State<rooms> {
                   }, // _listen,
                   icon: Icon(_isListening! ? Icons.mic : Icons.mic_none),
                 ),
+                Container(
+                    height: 10,
+                    width: 10,
+                    child: rive.RiveAnimation.asset("robo_sketch.riv")),
               ],
             )),
         Positioned(
