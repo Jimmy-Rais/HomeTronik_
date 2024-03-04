@@ -360,9 +360,14 @@ class _roomsState extends State<rooms> {
                   icon: Icon(_isListening! ? Icons.mic : Icons.mic_none),
                 ),
                 Container(
-                    height: 10,
-                    width: 10,
-                    child: rive.RiveAnimation.asset("robo_sketch.riv")),
+                    height: 50,
+                    width: 50,
+                    child: /*rive.RiveAnimation.network(
+                      'https://public.rive.app/community/runtime-files/5380-10664-darwin-bot/'
+                      // 'https://public.rive.app/community/runtime-files/2191-4327-loader-solicitud-de-cuentas.riv',
+                      ),
+                ),*/
+                        rive.RiveAnimation.asset("darwin_bot.riv")),
               ],
             )),
         Positioned(
