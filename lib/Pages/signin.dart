@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:esp/main.dart';
 import 'package:flutter/material.dart';
+import 'package:introduction_screen/introduction_screen.dart';
+import 'package:flutter/foundation.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,7 +35,101 @@ class _signinState extends State<signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
+      body: IntroductionScreen(
+          pages: [
+            PageViewModel(
+              title: 'HomeTronic',
+
+              body: 'A Modern smart Home with Voice assistant integration',
+              image: buildImage("images/ht.jpg"),
+              //getPageDecoration, a method to customise the page style
+              decoration: getPageDecoration(),
+            ),
+            /*PageViewModel(
+              title: 'HomeTronic',
+              body:
+                  'Seameless control of house appliances via smartphone and voice assistant',
+              image: buildImage("images/home.jpeg"),
+              //getPageDecoration, a method to customise the page style
+              decoration: getPageDecoration(),
+            ),*/
+            PageViewModel(
+              title: 'AI powered smart meter',
+              body:
+                  'Energy consumption optimization solutions with a modern smart meter',
+              image: buildImage("images/sm.png"),
+              //getPageDecoration, a method to customise the page style
+              decoration: getPageDecoration(),
+            ),
+            PageViewModel(
+              title: 'Enhanced Security',
+              body: 'Instant access to CCTV Cameras and sensors',
+              image: buildImage("images/sec.jpg"),
+              //getPageDecoration, a method to customise the page style
+              decoration: getPageDecoration(),
+            ),
+          ],
+          onDone: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MyHomePage2()));
+            if (kDebugMode) {
+              print("Done clicked");
+            }
+          },
+          //ClampingScrollPhysics prevent the scroll offset from exceeding the bounds of the content.
+          scrollPhysics: const ClampingScrollPhysics(),
+          showDoneButton: true,
+          showNextButton: true,
+          showSkipButton: true,
+          //isBottomSafeArea: true,
+          skip:
+              const Text("Skip", style: TextStyle(fontWeight: FontWeight.w600)),
+          next: const Icon(Icons.forward),
+          done:
+              const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+          dotsDecorator: getDotsDecorator()),
+    );
+  }
+
+  //widget to add the image on screen
+  Widget buildImage(String imagePath) {
+    return Container(
+        color: Colors.white,
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 80,
+          child: Image.asset(
+            imagePath,
+            width: 650,
+            height: 900,
+          ),
+        ));
+  }
+
+  //method to customise the page style
+  PageDecoration getPageDecoration() {
+    return const PageDecoration(
+      imagePadding: EdgeInsets.only(top: 120),
+      pageColor: Colors.white,
+      bodyPadding: EdgeInsets.only(top: 30, left: 20, right: 20),
+      titlePadding: EdgeInsets.only(top: 30),
+      bodyTextStyle: TextStyle(color: Colors.black54, fontSize: 15),
+    );
+  }
+
+  //method to customize the dots style
+  DotsDecorator getDotsDecorator() {
+    return const DotsDecorator(
+      spacing: EdgeInsets.symmetric(horizontal: 2),
+      activeColor: Colors.indigo,
+      color: Colors.grey,
+      activeSize: Size(12, 5),
+      activeShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      ),
+    );
+
+    /*SingleChildScrollView(
             child: Stack(children: <Widget>[
       Container(
         height: 850,
@@ -207,6 +303,6 @@ class _signinState extends State<signin> {
                   ))
             ])*/
           ]))
-    ])));
+    ])));*/
   }
 }
