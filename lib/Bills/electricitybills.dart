@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:kdgaugeview/kdgaugeview.dart';
 
 class bills extends StatefulWidget {
   bills(this.plotname, {super.key});
@@ -88,4 +89,38 @@ class SalesData {
   final Color color; // Color property to store color for each data point
 
   SalesData(this.year, this.sales, this.color);
+}
+
+class progress extends StatelessWidget {
+  const progress({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 120,
+      height: 120,
+      padding: EdgeInsets.all(10),
+      child: KdGaugeView(
+        innerCirclePadding: 10,
+        speedTextStyle: TextStyle(
+            color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
+        minMaxTextStyle: TextStyle(color: Colors.grey, fontSize: 5),
+        unitOfMeasurementTextStyle: TextStyle(color: Colors.grey, fontSize: 10),
+        minSpeed: 0,
+        maxSpeed: 100,
+        speed: 10,
+        animate: true,
+        duration: Duration(seconds: 3),
+        alertSpeedArray: [40, 80, 90],
+        alertColorArray: [
+          Colors.orange,
+          const Color.fromARGB(255, 83, 85, 93),
+          Colors.red
+        ],
+        unitOfMeasurement: "INR(₹)",
+        gaugeWidth: 10,
+        fractionDigits: 1,
+      ),
+    );
+  }
 }

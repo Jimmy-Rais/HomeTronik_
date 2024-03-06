@@ -138,16 +138,6 @@ class _MyHomePage2State extends State<MyHomePage2> {
           : Color.fromARGB(255, 255, 255, 255), //Colors.blueGrey[300],
       body: Stack(children: <Widget>[
         Positioned(
-          top: 50,
-          left: 160,
-          child: Text(
-            '$TempStatus',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Positioned(
             top: 50,
             right: 20,
             child: IconButton(
@@ -240,7 +230,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
           ),
         ),
         Positioned(
-            left: 35,
+            left: 20,
             top: 130,
             child: Column(
               children: [
@@ -255,7 +245,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
               ],
             )),
         Positioned(
-            left: 35,
+            left: 20,
             top: 148,
             child: Column(children: [
               Text(
@@ -266,7 +256,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 ),
               ),
             ])),
-        Positioned(
+        /*Positioned(
           top: 185,
           left: 3,
           right: 5,
@@ -290,7 +280,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
               ],
             ),
           ),
-        ),
+        ),*/
         Positioned(
           top: 310,
           left: 12,
@@ -372,8 +362,10 @@ class _MyHomePage2State extends State<MyHomePage2> {
         ),
         Positioned(
           top: 45,
-          left: 150,
-          child: Container(
+          left: 130,
+          child: progress(),
+
+          /*Container(
             child: Column(
               children: [
                 Padding(
@@ -511,7 +503,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     ])),
             height: 60,
             width: 85,
-          ),
+          ),*/
         ),
         Positioned(
           bottom: 5,

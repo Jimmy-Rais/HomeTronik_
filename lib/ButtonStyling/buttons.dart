@@ -129,6 +129,44 @@ class buttonStyle2 extends StatelessWidget {
           //borderRadius: BorderRadius.circular(30),
           color: Colors.blueGrey[300],
           borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blueGrey.shade700,
+              // Color of the shadow
+              spreadRadius: 1, // Spread radius of the shadow
+              blurRadius: 10, // Blur radius of the shadow
+              offset:
+                  Offset(3, 3), // Offset of the shadow (horizontal, vertical)
+            ),
+            BoxShadow(
+              color: Colors.blueGrey.shade200,
+              // Color of the shadow
+              spreadRadius: 1, // Spread radius of the shadow
+              blurRadius: 10, // Blur radius of the shadow
+              offset:
+                  Offset(-4, -4), // Offset of the shadow (horizontal, vertical)
+            ),
+          ],
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                darktheme ? Colors.black : Colors.white,
+                darktheme ? Colors.black : Colors.white,
+                //Colors.blueGrey.shade200,
+                //Colors.blueGrey.shade400,
+              ])),
+
+      /*BoxDecoration(
+
+          //borderRadius: BorderRadius.circular(30),
+          color: Colors.blueGrey[300],
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
             bottomLeft: Radius.circular(30),
@@ -160,7 +198,7 @@ class buttonStyle2 extends StatelessWidget {
               colors: [
                 darktheme ? Colors.black : Colors.white,
                 darktheme ? Colors.black : Colors.white,
-              ])),
+              ])),*/
       height: 75,
       width: 65,
     );
