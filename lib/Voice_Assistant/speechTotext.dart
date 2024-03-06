@@ -75,3 +75,17 @@ class _SpeechtotextState extends State<Speechtotext> {
     }
   }
 }
+
+class voiceassist extends StatefulWidget {
+  const voiceassist({super.key});
+
+  @override
+  State<voiceassist> createState() => _voiceassistState();
+}
+
+class _voiceassistState extends State<voiceassist> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}

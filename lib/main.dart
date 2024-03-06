@@ -12,11 +12,17 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'Bills/electricitybills.dart';
 import 'package:esp/ButtonStyling/buttons.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+
 //import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 /*import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
-
+const talk = "images/tk.gif";
+const sleep = "images/sleep.gif";
+const listen = "images/listen.gif";
+const talk_d = "images/talk_d.gif";
+const sleep_d = "images/sleep_d.gif";
+const listen_d = "images/listen_d.gif";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -256,11 +262,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 ),
               ),
             ])),
-        /*Positioned(
-          top: 185,
-          left: 3,
+        Positioned(
+          top: 150,
+          left: 240,
           right: 5,
-          child: SingleChildScrollView(
+          child: InkWell(
+            onTap: () {},
+            child: CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage(dark_theme ? sleep_d : sleep),
+            ),
+          ),
+        ),
+
+        /* SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               //Main Features buttons

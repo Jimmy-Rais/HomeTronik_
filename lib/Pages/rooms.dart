@@ -350,6 +350,10 @@ class _roomsState extends State<rooms> {
                       color: Colors.white,
                     )),
                 SizedBox(width: 50),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage("images/sleep_d.gif"),
+                ),
                 IconButton(
                   onPressed: () {
                     _timer?.cancel();
