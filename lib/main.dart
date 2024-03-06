@@ -11,6 +11,8 @@ import 'Pages/rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'Bills/electricitybills.dart';
 import 'package:esp/ButtonStyling/buttons.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+//import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 /*import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';*/
@@ -37,8 +39,12 @@ class MyHomePage2 extends StatefulWidget {
 }
 
 class _MyHomePage2State extends State<MyHomePage2> {
+  bool isDaily = false;
+  String plotype = "monthly";
+  double plotwidth = 0;
   bool dark_theme = false;
   bool newdarktheme = false;
+  String dropdownValue = 'daily';
   var kitchen = "images/kitchen.jpg";
   var guest = "images/guest.jpg";
   var living = "images/living.jpg";
@@ -61,6 +67,13 @@ class _MyHomePage2State extends State<MyHomePage2> {
     _loadTempStatus();
     _loadHumStatus();
     _toggle();
+    _plotCat();
+  }
+
+  void updatePlotName(String newPlotName) {
+    setState(() {
+      plotype = newPlotName;
+    });
   }
 
   _toggle() async {
@@ -69,6 +82,14 @@ class _MyHomePage2State extends State<MyHomePage2> {
     setState(() {
       dark_theme = !dark_theme; //? false : true;
       print(dark_theme);
+    });
+  }
+
+  _plotCat() async {
+    isDaily == true ? false : true;
+    isDaily ? plotype = "daily" : plotype = "weekly";
+    setState(() {
+      isDaily = !isDaily; //? false : true;
     });
   }
 
@@ -495,9 +516,52 @@ class _MyHomePage2State extends State<MyHomePage2> {
         Positioned(
           bottom: 5,
           left: 1,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: bills(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 250, top: 220),
+                child: DropdownButton<String>(
+                  value: plotype,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(
+                      color: dark_theme ? Colors.grey : Colors.black,
+                      fontSize: 16),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  onChanged: (String? newValue) {
+                    switch (newValue) {
+                      case 'daily':
+                        updatePlotName('daily');
+                        break;
+                      case 'monthly':
+                        updatePlotName('monthly');
+                        break;
+                      case 'weekly':
+                        updatePlotName('weekly');
+                        break;
+                      default:
+                        // Handle unexpected options (optional)
+                        break;
+                    }
+                  },
+                  items: <String>['daily', 'weekly', 'monthly']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: bills(plotype),
+              ),
+            ],
           ),
         )
       ]),

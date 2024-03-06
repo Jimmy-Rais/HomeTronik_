@@ -38,21 +38,21 @@ class _signinState extends State<signin> {
       body: IntroductionScreen(
           pages: [
             PageViewModel(
-              title: 'HomeTronic',
+              title: 'HomeTronik',
 
-              body: 'A Modern smart Home with Voice assistant integration',
+              body: 'Your home, effortlessly smart',
+              image: buildImage("images/hp.jpg"),
+              //getPageDecoration, a method to customise the page style
+              decoration: getPageDecoration(),
+            ),
+            PageViewModel(
+              title: 'Your home, your control',
+              body:
+                  'Seameless control of house appliances and voice assistant integration',
               image: buildImage("images/ht.jpg"),
               //getPageDecoration, a method to customise the page style
               decoration: getPageDecoration(),
             ),
-            /*PageViewModel(
-              title: 'HomeTronic',
-              body:
-                  'Seameless control of house appliances via smartphone and voice assistant',
-              image: buildImage("images/home.jpeg"),
-              //getPageDecoration, a method to customise the page style
-              decoration: getPageDecoration(),
-            ),*/
             PageViewModel(
               title: 'AI powered smart meter',
               body:
@@ -97,7 +97,7 @@ class _signinState extends State<signin> {
         color: Colors.white,
         child: CircleAvatar(
           backgroundColor: Colors.white,
-          radius: 80,
+          radius: 100,
           child: Image.asset(
             imagePath,
             width: 650,

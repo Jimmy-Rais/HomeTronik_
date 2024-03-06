@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class bills extends StatefulWidget {
-  const bills({super.key});
-
+  bills(this.plotname, {super.key});
+  String plotname;
   @override
   State<bills> createState() => _billsState();
 }
@@ -27,28 +27,44 @@ class _billsState extends State<bills> {
     // Retrieve the sales values in a single line of code
     final List<Color> salesColors =
         salesData.map((data) => data.color).toList();
-    return Container(
-      width: 350,
-      height: 180,
-      child: SfCartesianChart(
-        // Define your chart properties here
-        primaryXAxis: CategoryAxis(
-          majorGridLines: MajorGridLines(width: 0), // Remove major grid lines
+
+    return Column(
+      children: [
+        Container(
+          width: 350,
+          height: 150,
+          child: SfCartesianChart(
+            // Define your chart properties here
+            primaryXAxis: CategoryAxis(
+              majorGridLines:
+                  MajorGridLines(width: 0), // Remove major grid lines
+            ),
+            primaryYAxis: NumericAxis(
+              majorGridLines:
+                  MajorGridLines(width: 0), // Remove major grid lines
+            ),
+            // primaryXAxis: CategoryAxis(),
+            series: <CartesianSeries>[
+              if (widget.plotname == 'monthly')
+                StackedColumnSeries<SalesData, String>(
+                  dataSource: salesData,
+                  xValueMapper: (SalesData sales, _) => sales.year,
+                  yValueMapper: (SalesData sales, _) => sales.sales,
+                  width: 0.5,
+                  color: salesColors[1],
+                )
+              else
+                FastLineSeries<SalesData, String>(
+                  dataSource: salesData,
+                  xValueMapper: (SalesData sales, _) => sales.year,
+                  yValueMapper: (SalesData sales, _) => sales.sales,
+                  width: 3.5,
+                  color: salesColors[1],
+                )
+            ],
+          ),
         ),
-        primaryYAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 0), // Remove major grid lines
-        ),
-        // primaryXAxis: CategoryAxis(),
-        series: <CartesianSeries>[
-          StackedColumnSeries<SalesData, String>(
-            dataSource: salesData,
-            xValueMapper: (SalesData sales, _) => sales.year,
-            yValueMapper: (SalesData sales, _) => sales.sales,
-            width: 0.5,
-            color: salesColors[0],
-          )
-        ],
-      ),
+      ],
     );
   }
 }
