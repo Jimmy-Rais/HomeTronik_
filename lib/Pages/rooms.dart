@@ -11,6 +11,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:knob_widget/knob_widget.dart';
 import 'dart:async';
 import 'package:rive/rive.dart' as rive;
+import 'package:esp/Voice_Assistant/speechTotext.dart';
 
 //Images
 const kitchen = "images/kitchen.jpg";
@@ -93,7 +94,7 @@ class _roomsState extends State<rooms> {
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
-    _listen();
+    //_listen();
     _led(); //Toggle the led state
     _ac(); //Toggle the ac state
     _fan(); //Toggle the fan state
@@ -101,7 +102,7 @@ class _roomsState extends State<rooms> {
     _loadTempStatus(); //Retrieve the actual room state
   }
 
-  void _roomname() {
+  _roomname() {
     if (widget.img == kitchen) {
       setState(() {
         isKitchen = true;
@@ -137,7 +138,7 @@ class _roomsState extends State<rooms> {
     }
   }
 
-  void _listen() async {
+  /* void _listen() async {
     if (!_isListening) {
       bool available = await _speech!.initialize(
         onStatus: (val) => print('onStatus: $val'),
@@ -211,7 +212,7 @@ class _roomsState extends State<rooms> {
       setState(() => _isListening = false);
       _speech!.stop();
     }
-  }
+  }*/
 
 //Function to retrieve Temperature and Humidity of the room
   _loadTempStatus() async {
@@ -225,21 +226,21 @@ class _roomsState extends State<rooms> {
   }
 
 // Functions that toggle the appliances states
-  void _led() {
+  _led() {
     setState(() {
       led = !led;
       ledStatusRef.set(led);
     });
   }
 
-  void _ac() {
+  _ac() {
     setState(() {
       ac = !ac;
       acStatusRef.set(ac);
     });
   }
 
-  void _fan() {
+  _fan() {
     setState(() {
       fan = !fan;
       fanStatusRef.set(fan);
@@ -248,6 +249,7 @@ class _roomsState extends State<rooms> {
 
   @override
   Widget build(BuildContext context) {
+    var myimg = widget.img;
     return Scaffold(
       backgroundColor: widget.dark_theme ? Colors.black : Colors.white,
       // // Colors.blueGrey[300],
@@ -349,12 +351,17 @@ class _roomsState extends State<rooms> {
                       size: 20,
                       color: Colors.white,
                     )),
-                SizedBox(width: 50),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage("images/sleep_d.gif"),
+                SizedBox(width: 30),
+                voiceassist(
+                  widget.dark_theme,
+                  myimg,
+                  () => _led(),
+                  () => _fan(),
+                  () => _ac(),
+                  () => _loadTempStatus(),
+                  () => _roomname(),
                 ),
-                IconButton(
+                /*  IconButton(
                   onPressed: () {
                     _timer?.cancel();
                     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
@@ -362,8 +369,8 @@ class _roomsState extends State<rooms> {
                     });
                   }, // _listen,
                   icon: Icon(_isListening! ? Icons.mic : Icons.mic_none),
-                ),
-                Container(
+                ),*/
+                /*  Container(
                     height: 50,
                     width: 50,
                     child: /*rive.RiveAnimation.network(
@@ -371,7 +378,7 @@ class _roomsState extends State<rooms> {
                       // 'https://public.rive.app/community/runtime-files/2191-4327-loader-solicitud-de-cuentas.riv',
                       ),
                 ),*/
-                        rive.RiveAnimation.asset("darwin_bot.riv")),
+                        rive.RiveAnimation.asset("darwin_bot.riv")),*/
               ],
             )),
         Positioned(
@@ -789,11 +796,11 @@ class _roomsState extends State<rooms> {
                                   SizedBox(width: 20),
                                   IconButton(
                                       onPressed: () {
-                                        Navigator.push(
+                                        /* Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Speechtotext()));
+                                                    Speechtotext()));*/
                                       },
                                       icon: Icon(
                                         Icons.toggle_off_outlined,

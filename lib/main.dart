@@ -1,6 +1,7 @@
 /*
 Created by Rais Gachaba Jimmy    
 */
+import 'package:esp/Voice_Assistant/mainassistant.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'Bills/electricitybills.dart';
 import 'package:esp/ButtonStyling/buttons.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:esp/Voice_Assistant/mainassistant.dart';
 
 //import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
@@ -74,6 +76,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
     _loadHumStatus();
     _toggle();
     _plotCat();
+    voiceassist2State();
   }
 
   void updatePlotName(String newPlotName) {
@@ -263,17 +266,21 @@ class _MyHomePage2State extends State<MyHomePage2> {
               ),
             ])),
         Positioned(
-          top: 150,
-          left: 240,
-          right: 5,
-          child: InkWell(
+            top: 150,
+            left: 240,
+            right: 5,
+            child: voiceassist2(
+                dark_theme,
+                dark_theme
+                    ? sleep_d
+                    : sleep) /*InkWell(
             onTap: () {},
             child: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage(dark_theme ? sleep_d : sleep),
             ),
-          ),
-        ),
+          ),*/
+            ),
 
         /* SingleChildScrollView(
             scrollDirection: Axis.horizontal,

@@ -94,7 +94,6 @@ flutter:
     - images/sleep_d.gif
     - images/talk_d.gif
     - images/listen_d.gif
-    #- images/darwin_bot.riv
     #- images/robo_sketch.riv
   #   - images/a_dot_ham.jpeg
 
