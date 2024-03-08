@@ -31,23 +31,56 @@ class voiceassist2State extends State<voiceassist2> {
   @override
   void initState() {
     _listen3();
+    talk1();
+    listen1();
+    sleep1();
     super.initState();
     _speech = stt.SpeechToText();
 
     //Retrieve the actual room state
   }
 
+  void talk1() {
+    widget.theme
+        ? setState(() {
+            img = talk_d;
+          })
+        : setState(() {
+            img = talk;
+          });
+  }
+
+  void listen1() {
+    widget.theme
+        ? setState(() {
+            img = listen_d;
+          })
+        : setState(() {
+            img = listen;
+          });
+  }
+
+  void sleep1() {
+    widget.theme
+        ? setState(() {
+            img = sleep_d;
+          })
+        : setState(() {
+            img = sleep;
+          });
+  }
+
   _listen3() async {
-    print("hoh");
     if (!_isListening) {
       bool available = await _speech!.initialize(
         onStatus: (val) => print('onStatus: $val'),
         onError: (val) => print('onError: $val'),
       );
       if (available) {
-        setState(() {
-          img = widget.theme ? listen_d : listen;
-        });
+        listen1();
+        /*setState(() {
+          listen1();
+        });*/
 
         setState(() {
           _isListening = true;
@@ -58,16 +91,11 @@ class voiceassist2State extends State<voiceassist2> {
 
             // appliances controlled by voice commands
             if (_text == "Jimmy") {
-              setState(() {
-                img = widget.theme ? talk_d : talk;
-              });
-
+              talk1();
               flutterTts.speak(
                   'Yes....Welcome to HomeTronik,a new SmartHome experience.How can I assist you');
               flutterTts.setCompletionHandler(() {
-                setState(() {
-                  img = widget.theme ? sleep_d : sleep;
-                });
+                sleep1();
               });
               /*setState(() {
                 img = widget.theme ? sleep_d : sleep;

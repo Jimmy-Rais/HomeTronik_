@@ -76,7 +76,6 @@ class _MyHomePage2State extends State<MyHomePage2> {
     _loadHumStatus();
     _toggle();
     _plotCat();
-    voiceassist2State();
   }
 
   void updatePlotName(String newPlotName) {
