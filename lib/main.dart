@@ -14,6 +14,7 @@ import 'Bills/electricitybills.dart';
 import 'package:esp/ButtonStyling/buttons.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:esp/Voice_Assistant/mainassistant.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 //import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
@@ -138,9 +139,99 @@ class _MyHomePage2State extends State<MyHomePage2> {
     });
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final List<Widget> buttons = [
+      buttonStyle(kitchen, dark_theme, () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => rooms(dark_theme, kitchen)));
+      }),
+      //living room decorated button
+      buttonStyle(living, dark_theme, () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => rooms(dark_theme, living)));
+      }),
+      //Guest room decorated button
+      buttonStyle(guest, dark_theme, () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => rooms(dark_theme, guest)));
+      }),
+
+      //Fence decorated Button
+      buttonStyle(fence, dark_theme, () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => rooms(dark_theme, fence)));
+      }),
+      buttonStyle(out, dark_theme, () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => rooms(dark_theme, out)));
+      }),
+      // Add more buttons here with different labels and functionality
+    ];
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+          backgroundColor: Color.fromRGBO(66, 66, 66, 1),
+          child: ListView(padding: EdgeInsets.zero, children: [
+            SizedBox(
+              height: 320,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(105, 77, 140, 176),
+                  /*Color.fromARGB(255, 99, 178, 223),*/
+                ),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.group,
+              ),
+              title: const Text('Settings',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.remove_red_eye,
+              ),
+              title: const Text('Cctv cameras',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.group,
+              ),
+              title: const Text('Energy consumptions',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.remove_red_eye,
+              ),
+              title: const Text('Water',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.group,
+              ),
+              title: const Text('Trash management',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.remove_red_eye,
+              ),
+              title: const Text('Bot',
+                  style: TextStyle(fontSize: 12, color: Colors.grey)),
+            ),
+          ])),
       backgroundColor: dark_theme
           ? Colors.black
           : Color.fromARGB(255, 255, 255, 255), //Colors.blueGrey[300],
@@ -149,7 +240,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
             top: 50,
             right: 20,
             child: IconButton(
-                onPressed: () {},
+                onPressed: () => _scaffoldKey.currentState!.openDrawer(),
                 icon: Icon(
                   Icons.menu_outlined,
                   size: 45,
@@ -268,263 +359,34 @@ class _MyHomePage2State extends State<MyHomePage2> {
             top: 150,
             left: 240,
             right: 5,
-            child: voiceassist2(
-                dark_theme,
-                dark_theme
-                    ? sleep_d
-                    : sleep) /*InkWell(
-            onTap: () {},
-            child: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(dark_theme ? sleep_d : sleep),
-            ),
-          ),*/
-            ),
-
-        /* SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              //Main Features buttons
-              children: [
-                buttonStyle2(Icons.wifi, dark_theme, "Internet", () {}),
-                SizedBox(width: 28),
-                buttonStyle2(
-                    FontAwesomeIcons.shower, dark_theme, "Water", () {}),
-                SizedBox(width: 28),
-                buttonStyle2(Icons.gas_meter, dark_theme, "Smart meter", () {}),
-                SizedBox(width: 28),
-                buttonStyle2(
-                    FontAwesomeIcons.trash, dark_theme, "Trash", () {}),
-                SizedBox(width: 28),
-                buttonStyle2(
-                    FontAwesomeIcons.trash, dark_theme, "Trash", () {}),
-              ],
-            ),
-          ),
-        ),*/
+            child: voiceassist2(dark_theme, dark_theme ? sleep_d : sleep)),
         Positioned(
-          top: 310,
+          top: 290,
           left: 12,
           right: 1,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                //Kitchen decorated button
-                buttonStyle(kitchen, dark_theme, () {
-                  /*Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          rooms(dark_theme, kitchen),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        var begin = 0.0;
-                        var end = 1.0;
-                        var curve = Curves.ease;
-                        var tween = Tween(begin: begin, end: end)
-                            .chain(CurveTween(curve: curve));
-                        return ScaleTransition(
-                          scale: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                    ),
-                  );*/
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, kitchen)));
-                }),
-                SizedBox(width: 20),
-                //living room decorated button
-                buttonStyle(living, dark_theme, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, living)));
-                }),
-                SizedBox(width: 20),
-                //Guest room decorated button
-                buttonStyle(guest, dark_theme, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, guest)));
-                }),
-                SizedBox(width: 20),
-                //Fence decorated Button
-                buttonStyle(fence, dark_theme, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, fence)));
-                }),
-                SizedBox(width: 20),
-                //Hall decorated Button
-                /* buttonStyle(hall, dark_theme, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, hall)));
-                }),*/
-                //Out decoration button
-                buttonStyle(out, dark_theme, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => rooms(dark_theme, out)));
-                }),
-                SizedBox(width: 20),
-              ],
-            ),
-          ),
+          child: CarouselSlider(
+              items: buttons,
+              options: CarouselOptions(
+                height: 260,
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.5,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: false,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.3,
+                scrollDirection: Axis.horizontal,
+              ) // Optional: Disable infinite loop
+              ),
         ),
         Positioned(
           top: 45,
           left: 130,
           child: progress(),
-
-          /*Container(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 1, right: 50),
-                  child: Icon(
-                    Icons.cloud,
-                    size: 18,
-                    color: dark_theme ? Colors.white : Colors.black,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 1,
-                    left: 16,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Temp:',
-                        style: TextStyle(
-                          color: dark_theme ? Colors.white : Colors.black,
-                          fontSize: 10,
-                        ),
-                      ),
-                      DefaultTextStyle(
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 36, 208, 243),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Agne',
-                        ),
-                        child: AnimatedTextKit(
-                          repeatForever: true,
-                          animatedTexts: [
-                            TypewriterAnimatedText(
-                              '$TempStatus°C',
-                              speed: const Duration(milliseconds: 300),
-                            ),
-                          ],
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                        ),
-                      ),
-                      /*    Text(
-                        '$TempStatus°C',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 36, 208, 243),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),*/
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 2,
-                    left: 25,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Hum:",
-                        style: TextStyle(
-                            color: dark_theme ? Colors.white : Colors.black,
-                            fontSize: 10),
-                      ),
-                      DefaultTextStyle(
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 36, 208, 243),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Agne',
-                        ),
-                        child: AnimatedTextKit(
-                          repeatForever: true,
-                          animatedTexts: [
-                            TypewriterAnimatedText(
-                              '$HumStatus%',
-                              speed: const Duration(milliseconds: 300),
-                            ),
-                          ],
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                        ),
-                      ),
-                      /* Text(
-                        "$HumStatus%",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 36, 208, 243),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),*/
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50),
-                ),
-                //borderRadius: BorderRadius.circular(30),
-                color: Colors.blueGrey[300],
-                boxShadow: [
-                  BoxShadow(
-                    color: dark_theme ? Colors.white : Colors.blueGrey.shade700,
-                    // Color of the shadow
-                    spreadRadius: 1, // Spread radius of the shadow
-                    blurRadius: 10, // Blur radius of the shadow
-                    offset: Offset(
-                        3, 3), // Offset of the shadow (horizontal, vertical)
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    // Color of the shadow
-                    spreadRadius: 1, // Spread radius of the shadow
-                    blurRadius: 10, // Blur radius of the shadow
-                    offset: Offset(
-                        -4, -4), // Offset of the shadow (horizontal, vertical)
-                  ),
-                ],
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      dark_theme ? Colors.black : Colors.white,
-                      dark_theme ? Colors.black : Colors.white,
-                    ])),
-            height: 60,
-            width: 85,
-          ),*/
         ),
         Positioned(
           bottom: 5,
