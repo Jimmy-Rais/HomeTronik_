@@ -12,6 +12,8 @@ import 'package:knob_widget/knob_widget.dart';
 import 'dart:async';
 import 'package:rive/rive.dart' as rive;
 import 'package:esp/Voice_Assistant/speechTotext.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 //Images
 const kitchen = "images/kitchen.jpg";
@@ -52,7 +54,7 @@ class rooms extends StatefulWidget {
 
 class _roomsState extends State<rooms> {
   Timer? _timer;
-
+  double _value = 40.0;
   @override
   void dispose() {
     _timer?.cancel();
@@ -474,7 +476,7 @@ class _roomsState extends State<rooms> {
                               ),
                               DefaultTextStyle(
                                 style: const TextStyle(
-                                  color: Color.fromARGB(255, 36, 208, 243),
+                                  color: Colors.green,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'Abel',
@@ -527,7 +529,7 @@ class _roomsState extends State<rooms> {
                                       : Icons.toggle_off_outlined,
                                   color: widget.dark_theme
                                       ? ac
-                                          ? Colors.yellow
+                                          ? Colors.green
                                           : Colors.white
                                       : ac
                                           ? Color.fromARGB(125, 49, 135, 206)
@@ -570,7 +572,7 @@ class _roomsState extends State<rooms> {
                                     size: led ? 30 : 20,
                                     color: widget.dark_theme
                                         ? led
-                                            ? Colors.yellow
+                                            ? Colors.green
                                             : Colors.white
                                         : led
                                             ? Colors.blue
@@ -593,7 +595,7 @@ class _roomsState extends State<rooms> {
                                         : Icons.toggle_off_outlined,
                                     color: widget.dark_theme
                                         ? led
-                                            ? Colors.yellow
+                                            ? Colors.green
                                             : Colors.white
                                         : led
                                             ? Colors.blue
@@ -602,9 +604,26 @@ class _roomsState extends State<rooms> {
                                   ))
                             ],
                           ),
+                          SfSlider(
+                            activeColor: Colors.green,
+                            inactiveColor: Colors.grey,
+                            min: 0.0,
+                            max: 100.0,
+                            value: _value,
+                            interval: 20,
+                            showTicks: true,
+                            showLabels: true,
+                            enableTooltip: true,
+                            minorTicksPerInterval: 1,
+                            onChanged: (dynamic value) {
+                              setState(() {
+                                _value = value;
+                              });
+                            },
+                          ),
                           Padding(
                             padding: EdgeInsets.only(
-                              top: 60,
+                              top: 10,
                             ),
                             child: Row(children: [
                               Padding(padding: EdgeInsets.only(left: 35)),
@@ -675,7 +694,7 @@ class _roomsState extends State<rooms> {
                                     size: fan ? 30 : 25,
                                     color: widget.dark_theme
                                         ? fan
-                                            ? Colors.yellow
+                                            ? Colors.green
                                             : Colors.white
                                         : fan
                                             ? Colors.blue
@@ -695,7 +714,7 @@ class _roomsState extends State<rooms> {
                                         : Icons.toggle_off_outlined,
                                     color: widget.dark_theme
                                         ? fan
-                                            ? Colors.yellow
+                                            ? Colors.green
                                             : Colors.white
                                         : fan
                                             ? Colors.blue
