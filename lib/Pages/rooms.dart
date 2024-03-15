@@ -317,29 +317,6 @@ class _roomsState extends State<rooms> {
           ),
         ),
         Positioned(
-            top: 60,
-            right: 15,
-            child: Row(
-              children: [
-                Container(
-                  height: 8,
-                  width: 8,
-                  color: Colors.red,
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  'Live',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                )
-              ],
-            )),
-        Positioned(
             top: 40,
             //  left: 50,
             child: Row(
@@ -354,15 +331,7 @@ class _roomsState extends State<rooms> {
                       color: Colors.white,
                     )),
                 SizedBox(width: 30),
-                voiceassist(
-                  widget.dark_theme,
-                  myimg,
-                  () => _led(),
-                  () => _fan(),
-                  () => _ac(),
-                  () => _loadTempStatus(),
-                  () => _roomname(),
-                ),
+
                 /*  IconButton(
                   onPressed: () {
                     _timer?.cancel();
@@ -882,7 +851,16 @@ class _roomsState extends State<rooms> {
                               ])),
                     ),
                     SizedBox(width: 30),
-                    Container(
+                    voiceassist(
+                      widget.dark_theme,
+                      myimg,
+                      () => _led(),
+                      () => _fan(),
+                      () => _ac(),
+                      () => _loadTempStatus(),
+                      () => _roomname(),
+                    ),
+                    /*Container(
                       child: Column(
                         children: [
                           Padding(
@@ -975,7 +953,7 @@ class _roomsState extends State<rooms> {
                                 //Colors.blueGrey.shade200,
                                 //Colors.blueGrey.shade400,
                               ])),
-                    ),
+                    ),*/
                   ],
                 ),
               ],

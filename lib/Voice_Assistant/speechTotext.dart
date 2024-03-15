@@ -207,7 +207,8 @@ class voiceassistState extends State<voiceassist> {
     return InkWell(
       onTap: _listen2,
       child: CircleAvatar(
-        radius: 30,
+        backgroundColor: widget.theme ? Colors.black : Colors.white,
+        radius: 70,
         backgroundImage: AssetImage("images/sleep_d.gif"),
       ),
     );
