@@ -1,7 +1,7 @@
 /*
 Created by Rais Gachaba Jimmy    
 */
-import 'package:esp/Voice_Assistant/mainassistant.dart';
+import 'package:esp/models/Voice_Assistant/mainassistant.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,10 +10,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'Pages/rooms.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'Bills/electricitybills.dart';
-import 'package:esp/ButtonStyling/buttons.dart';
+import 'data/electricitybills.dart';
+import 'package:esp/models/ButtonStyling/buttons.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:esp/Voice_Assistant/mainassistant.dart';
+import 'package:esp/models/Voice_Assistant/mainassistant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 //import 'package:syncfusion_flutter_gauges/gauges.dart';

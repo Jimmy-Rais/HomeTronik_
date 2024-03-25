@@ -1,4 +1,4 @@
-import 'package:esp/ButtonStyling/buttons.dart';
+import 'package:esp/models/ButtonStyling/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,12 +6,12 @@ import 'signin.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import '../Voice_Assistant/speechTotext.dart';
+import '../models/Voice_Assistant/speechTotext.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:knob_widget/knob_widget.dart';
 import 'dart:async';
 import 'package:rive/rive.dart' as rive;
-import 'package:esp/Voice_Assistant/speechTotext.dart';
+import 'package:esp/models/Voice_Assistant/speechTotext.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -697,7 +697,7 @@ class _roomsState extends State<rooms> {
                             height: 50,
                             width: 80,
                             style: KnobStyle(
-                              labelStyle: TextStyle(fontSize: 10),
+                              labelStyle: TextStyle(fontSize: 11),
                               tickOffset: -5,
                               labelOffset: -15,
                               minorTicksPerInterval: 6,
